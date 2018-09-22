@@ -3,6 +3,8 @@
     <Table :data="tableData" :columns="tablecolumns" stripe></Table>
     <div style="margin: 10px;overflow: hidden">
       <div style="float: right;">
+        <Page :total="tableCount" :current="1" show-total show-sizer
+              @on-change="changePage" @on-page-size-change="changePagesize"></Page>
       </div>
     </div>
   </div>
@@ -14,7 +16,7 @@
     data() {
       return {
         tableData: [],
-        tableCount: 1,
+        tableCount: 10,
         tablecolumns: [
           {
             title: '名称',
@@ -29,6 +31,11 @@
             key: 'type'
           }
         ],
+        listQuery: {
+          limit: 10,
+          offset: 0,
+          search: ''
+        },
       }
     },
     created() {
@@ -36,12 +43,21 @@
     },
     methods: {
       fetchData() {
-        getDnsDomain().then(res => {
-          this.tableData = res.data
+        getDnsDomain(this.listQuery).then(res => {
+          this.tableData = res.data.results
+          this.tableCount = res.data.count
         }).catch(error => {
           const errordata = JSON.stringify(error.response.data)
           this.$Message.error(errordata);
         })
+      },
+      changePage(page) {
+        this.listQuery.offset = page - 1
+        this.fetchData()
+      },
+      changePagesize(size) {
+        this.listQuery.limit = size
+        this.fetchData()
       }
     }
   }
