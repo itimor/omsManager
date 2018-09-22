@@ -1,5 +1,18 @@
 <template>
-  <div>
+  <div class="components-container">
+    <div class="head-lavel">
+      <div class="table-button">
+        <Button type="primary" icon="md-add" @click="addForm=true">新建</Button>
+      </div>
+      <div class="table-search">
+        <Input
+          placeholder="搜索 ..."
+          v-model="listQuery.search"
+          @keyup.enter.native="searchClick">
+          <Icon type="ios-search" slot="suffix" @click="searchClick"/>
+        </Input>
+      </div>
+    </div>
     <Table :data="tableData" :columns="tablecolumns" stripe></Table>
     <div style="margin: 10px;overflow: hidden">
       <div style="float: right;">
@@ -36,6 +49,7 @@
           offset: 0,
           search: ''
         },
+        addForm: false
       }
     },
     created() {
@@ -58,7 +72,34 @@
       changePagesize(size) {
         this.listQuery.limit = size
         this.fetchData()
+      },
+      searchClick() {
+        this.fetchData()
       }
     }
   }
 </script>
+
+<style lang="less">
+  .components-container {
+    position: relative;
+    .head-lavel {
+      padding-bottom: 50px;
+    }
+
+    .table-button {
+      padding: 10px 0;
+      float: left;
+    }
+
+    .table-search {
+      float: right;
+      padding: 10px 0;
+    }
+
+    .table-pagination {
+      padding: 10px 0;
+      float: right;
+    }
+  }
+</style>
