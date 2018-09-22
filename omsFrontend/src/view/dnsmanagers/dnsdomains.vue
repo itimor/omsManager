@@ -84,22 +84,14 @@
   .components-container {
     position: relative;
     .head-lavel {
-      padding-bottom: 50px;
+      padding: 10px 0;
     }
-
     .table-button {
       padding: 10px 0;
-      float: left;
     }
-
     .table-search {
-      float: right;
+      width: 250px;
       padding: 10px 0;
-    }
-
-    .table-pagination {
-      padding: 10px 0;
-      float: right;
     }
   }
 </style>
