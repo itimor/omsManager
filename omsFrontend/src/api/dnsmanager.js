@@ -42,38 +42,6 @@ export function getDnsDomain(query) {
   })
 }
 
-// dnstypes
-export function postDnsType(data) {
-  return axios.request({
-    url: apiUrl.dnstypes,
-    method: 'post',
-    data
-  })
-}
-
-export function getDnsType(query) {
-  return axios.request({
-    url: apiUrl.dnstypes,
-    method: 'get',
-    params: query
-  })
-}
-
-export function putDnsType(id, data) {
-  return axios.request({
-    url: apiUrl.dnstypes + id + '/',
-    method: 'put',
-    data
-  })
-}
-
-export function deleteDnsType(id) {
-  return axios.request({
-    url: apiUrl.dnstypes + id + '/',
-    method: 'delete'
-  })
-}
-
 // dnsrecords
 export function postDnsRecord(data) {
   return axios.request({
@@ -103,5 +71,22 @@ export function deleteDnsRecord(id) {
   return axios.request({
     url: apiUrl.dnsrecords + id + '/',
     method: 'delete'
+  })
+}
+
+// godaddydomains
+export function getGodaddyDomain(query) {
+  return axios.request({
+    url: apiUrl.godaddydomains,
+    method: 'get',
+    params: query
+  })
+}
+
+export function PostGodaddyDomain(data) {
+  return axios.request({
+    url: apiUrl.godaddydomains,
+    method: 'post',
+    data
   })
 }

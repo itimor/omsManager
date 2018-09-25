@@ -2,7 +2,7 @@
 # author: kiven
 
 from rest_framework import serializers
-from dnsmanager.models import DnsApiKey, DnsDomainType, DnsDomain, DnsRecord
+from dnsmanager.models import DnsApiKey, DnsDomain, DnsRecord
 
 
 class DnsApiKeySerializer(serializers.ModelSerializer):
@@ -10,10 +10,6 @@ class DnsApiKeySerializer(serializers.ModelSerializer):
         model = DnsApiKey
         fields = ['url', 'id', 'name', 'key', 'secret', 'type', 'desc']
 
-class DnsDomainTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DnsDomainType
-        fields = ['url', 'id', 'name',  'desc']
 
 class DnsDomainSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,4 +23,12 @@ class DnsRecordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DnsRecord
-        fields = ['url', 'id', 'title', 'domain', 'name', 'status', 'type', 'value', 'value2', 'ttl', 'record_id', 'use', 'desc']
+        fields = ['url', 'id', 'title', 'domain', 'name', 'status', 'type', 'value', 'value2', 'ttl', 'record_id',
+                  'use', 'desc']
+
+
+class GodaddyDomainSerializer(serializers.Serializer):
+    domainId = serializers.IntegerField()
+    domain = serializers.CharField()
+    status = serializers.CharField()
+    createdAt = serializers.DateTimeField()

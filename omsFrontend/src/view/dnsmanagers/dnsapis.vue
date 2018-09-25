@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-  import {getDnsApi, deleteDnsApi} from '@/api/dnsmanager'
+  import {getDnsApi, deleteDnsApi, PostGodaddyDomain} from '@/api/dnsmanager'
   import addGroup from './components/adddnstapi.vue'
   import editGroup from './components/editdnsapi.vue'
 
@@ -53,7 +53,6 @@
           {
             title: '操作',
             key: 'action',
-            width: 150,
             align: 'center',
             render: (h, params) => {
               return h('div', [
@@ -72,6 +71,21 @@
                     }
                   }
                 }, '修改'),
+                h('Button', {
+                  props: {
+                    type: 'primary',
+                    size: 'small'
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: () => {
+                      this.editForm = true
+                      this.ruleForm = params.row
+                    }
+                  }
+                }, '同步'),
                 h('Poptip', {
                   props: {
                     title: '确定要删除吗！',
@@ -108,7 +122,10 @@
         },
         addForm: false,
         editForm: false,
-        ruleForm: {}
+        ruleForm: {},
+        dnsQuery: {
+          dnsname: this.dnsname
+        }
       }
     },
     created() {
@@ -136,6 +153,18 @@
       },
       searchClick() {
         this.fetchData()
+      },
+      syncDomwin() {
+        this.$message({
+          message: '正在同步中，请稍后',
+          type: 'info'
+        })
+        PostGodaddyDomain(this.dnsQuery).then(() => {
+          this.$message({
+            message: '同步成功',
+            type: 'success'
+          })
+        })
       }
     }
   }

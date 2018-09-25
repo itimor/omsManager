@@ -17,9 +17,8 @@ router.register(r'sendmail', SendmailViewSet)
 router.register(r'sendmessage', SendmessageViewSet)
 router.register(r'fileupload', FileUploadViewSet)
 
-from dnsmanager.views import DnsApiKeyViewSet, DnsDomainTypeViewSet, DnsDomainViewSet, DnsRecordViewSet
+from dnsmanager.views import DnsApiKeyViewSet, DnsDomainViewSet, DnsRecordViewSet
 
 router.register(r'dnsapikeys', DnsApiKeyViewSet)
-router.register(r'dnstypes', DnsDomainTypeViewSet)
 router.register(r'dnsdomains', DnsDomainViewSet)
 router.register(r'dnsrecords', DnsRecordViewSet)

@@ -38,12 +38,6 @@ export default [
         component: () => import('@/view/dnsmanagers/dnsapis.vue')
       },
       {
-        path: 'dnstypes',
-        name: 'dnstypes',
-        meta: {icon: 'md-bonfire', title: '域名类型'},
-        component: () => import('@/view/dnsmanagers/dnstypes.vue')
-      },
-      {
         path: 'dnsdomains',
         name: 'dnsdomains',
         meta: {icon: 'md-bonfire', title: '域名列表'},

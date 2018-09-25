@@ -5,8 +5,8 @@ from django.db import models
 from django.utils import timezone
 
 Dns_Types = {
-    'dnspod': 'dnspod',
     'godaddy': 'godaddy',
+    'dnspod': 'dnspod',
     'bind': 'bind',
 }
 
@@ -29,24 +29,12 @@ Dns_Status = {
 }
 
 
-class DnsDomainType(models.Model):
-    name = models.CharField(max_length=64, unique=True, verbose_name=u'名称')
-    desc = models.CharField(max_length=64, null=True, blank=True, verbose_name=u'描述')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = u'所在dns'
-        verbose_name_plural = u'所在dns'
-
-
 class DnsDomain(models.Model):
     title = models.CharField(max_length=200, unique=True, null=True, blank=True, verbose_name=u'记录名')
     name = models.CharField(max_length=20, verbose_name=u'名称')
     dnsService = models.CharField(max_length=200, null=True, blank=True, verbose_name=u'dns服务商')
     status = models.CharField(choices=Dns_Status.items(), default=0, max_length=1, verbose_name=u'状态')
-    type = models.ForeignKey(DnsDomainType, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'所在dns')
+    type = models.CharField(choices=Dns_Types.items(), default='godaddy', max_length=10, verbose_name=u'类型')
     create_time = models.DateTimeField(default=timezone.now, verbose_name=u'创建时间')
     expire_time = models.DateTimeField(default=timezone.now, verbose_name=u'过期时间')
     update_time = models.DateTimeField(auto_now=True, verbose_name=u'更新时间')

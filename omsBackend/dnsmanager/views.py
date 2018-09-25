@@ -2,9 +2,10 @@
 # author: kiven
 
 from rest_framework import viewsets
-from dnsmanager.models import DnsApiKey, DnsDomainType, DnsDomain, DnsRecord
-from dnsmanager.serializers import DnsApiKeySerializer, DnsDomainTypeSerializer, DnsDomainSerializer, \
-    DnsRecordSerializer
+from rest_framework.response import Response
+from dnsmanager.models import DnsApiKey, DnsDomain, DnsRecord
+from dnsmanager.serializers import DnsApiKeySerializer, DnsDomainSerializer, DnsRecordSerializer, GodaddyDomainSerializer
+from dnsmanager.godaddy_api import GodaddyApi
 
 
 class DnsApiKeyViewSet(viewsets.ModelViewSet):
@@ -13,16 +14,10 @@ class DnsApiKeyViewSet(viewsets.ModelViewSet):
     filter_fields = ['name']
 
 
-class DnsDomainTypeViewSet(viewsets.ModelViewSet):
-    queryset = DnsDomainType.objects.all()
-    serializer_class = DnsDomainTypeSerializer
-    filter_fields = ['name']
-
-
 class DnsDomainViewSet(viewsets.ModelViewSet):
     queryset = DnsDomain.objects.all().order_by('-update_time')
     serializer_class = DnsDomainSerializer
-    filter_fields = ['name', 'type']
+    filter_fields = ['name']
     search_fields = ['name']
 
 
@@ -31,3 +26,26 @@ class DnsRecordViewSet(viewsets.ModelViewSet):
     serializer_class = DnsRecordSerializer
     filter_fields = ['name', 'type', 'domain__name']
     search_fields = ['name']
+
+
+class GodaddyDomainViewSet(viewsets.ViewSet):
+    serializer_class = GodaddyDomainSerializer
+
+    def list(self, request):
+        dnsinfo = DnsApiKey.objects.get(name=request.GET['dnsname'])
+        dnsapi = GodaddyApi(dnsinfo.key, dnsinfo.secret)
+        query = dnsapi.get_domains()
+        serializer = GodaddyDomainSerializer(query, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        dnsinfo = DnsApiKey.objects.get(name=request.data['dnsname'])
+        dnsapi = GodaddyApi(dnsinfo.key, dnsinfo.secret)
+        query = dnsapi.get_domains()
+        for item in query:
+            dnsdomain = dict()
+            dnsdomain['dnsname'] = request.data['dnsname']
+            dnsdomain['type'] = 'godaddy'
+            dnsdomain['name'] = item['domain']
+            d, create = DnsDomain.objects.update_or_create(name=dnsdomain['name'], defaults=dnsdomain)
+        return Response({'status': create})
