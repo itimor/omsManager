@@ -10,8 +10,7 @@ from dnsmanager.serializers import DnsApiKeySerializer, DnsDomainTypeSerializer,
 class DnsApiKeyViewSet(viewsets.ModelViewSet):
     queryset = DnsApiKey.objects.all()
     serializer_class = DnsApiKeySerializer
-    filter_fields = ['name', 'type']
-    search_fields = ['name']
+    filter_fields = ['name']
 
 
 class DnsDomainTypeViewSet(viewsets.ModelViewSet):

@@ -2,6 +2,8 @@ export default {
   home: '首页',
   join: '过渡',
   dnsmanagers: '域名管理',
+  dnsapis: '域名API',
+  dnstypes: '域名类型',
   dnsdomains: '域名列表',
   count_to_page: '数字渐变',
   tables_page: '多功能表格',

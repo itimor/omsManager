@@ -2,6 +2,8 @@ export default {
   home: 'home',
   join: 'join',
   dnsmanagers: 'dnsmanagers',
+  dnsapis: 'dnsapis',
+  dnstypes: 'dnstypes',
   dnsdomains: 'dnsdomains',
   count_to_page: 'Count-to',
   tables_page: 'Table',

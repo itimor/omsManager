@@ -24,7 +24,7 @@ export default [
         path: '/home',
         name: 'home',
         meta: {hideInMenu: true, title: '首页', notCache: true},
-        component: () => import('@/view/single-page/home')
+        component: () => import('@/view/home')
       }
     ]
   },
@@ -32,17 +32,23 @@ export default [
     path: '/dnsmanagers', name: 'dnsmanagers', meta: {icon: 'logo-buffer', title: '域名管理'}, component: Main,
     children: [
       {
+        path: 'dnsapis',
+        name: 'dnsapis',
+        meta: {icon: 'md-bonfire', title: '域名api'},
+        component: () => import('@/view/dnsmanagers/dnsapis.vue')
+      },
+      {
+        path: 'dnstypes',
+        name: 'dnstypes',
+        meta: {icon: 'md-bonfire', title: '域名类型'},
+        component: () => import('@/view/dnsmanagers/dnstypes.vue')
+      },
+      {
         path: 'dnsdomains',
         name: 'dnsdomains',
         meta: {icon: 'md-bonfire', title: '域名列表'},
         component: () => import('@/view/dnsmanagers/dnsdomains.vue')
       },
-      {
-        path: 'count_to_page',
-        name: 'count_to_page',
-        meta: {icon: 'ios-nuclear-outline', title: '数字渐变'},
-        component: () => import('@/view/dnsmanagers/count-to.vue')
-      }
     ]
   },
   {path: '/401', name: 'error_401', meta: {hideInMenu: true}, component: () => import('@/view/error-page/401.vue')},

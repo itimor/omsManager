@@ -2,7 +2,6 @@
   <div class="components-container">
     <div class="head-lavel">
       <div class="table-button">
-        <Button type="primary" icon="md-add" @click="addForm=true">新建</Button>
       </div>
       <div class="table-search">
         <Input
@@ -13,7 +12,7 @@
         </Input>
       </div>
     </div>
-    <Table :data="tableData" :columns="tablecolumns" stripe></Table>
+    <Table border stripe :data="tableData" :columns="tablecolumns"></Table>
     <div style="margin: 10px;overflow: hidden">
       <div style="float: right;">
         <Page :total="tableCount" :current="1" show-total show-sizer
@@ -48,8 +47,7 @@
           limit: 10,
           offset: 0,
           search: ''
-        },
-        addForm: false
+        }
       }
     },
     created() {
@@ -60,9 +58,6 @@
         getDnsDomain(this.listQuery).then(res => {
           this.tableData = res.data.results
           this.tableCount = res.data.count
-        }).catch(error => {
-          const errordata = JSON.stringify(error.response.data)
-          this.$Message.error(errordata);
         })
       },
       changePage(page) {
@@ -81,17 +76,5 @@
 </script>
 
 <style lang="less">
-  .components-container {
-    position: relative;
-    .head-lavel {
-      padding: 10px 0;
-    }
-    .table-button {
-      padding: 10px 0;
-    }
-    .table-search {
-      width: 250px;
-      padding: 10px 0;
-    }
-  }
+
 </style>

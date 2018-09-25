@@ -40,8 +40,9 @@ export default {
   sendmail: '/api/sendmail/',
   sendmessage: '/api/sendmessage/',
 
-  // tools
-  dnsdomaintypes: '/api/dnsdomaintypes/',
+  // dns
+  dnsapis: '/api/dnsapikeys/',
+  dnstypes: '/api/dnstypes/',
   dnsdomains: '/api/dnsdomains/',
   dnsrecords: '/api/dnsrecords/'
 }

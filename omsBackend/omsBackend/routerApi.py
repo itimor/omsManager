@@ -20,6 +20,6 @@ router.register(r'fileupload', FileUploadViewSet)
 from dnsmanager.views import DnsApiKeyViewSet, DnsDomainTypeViewSet, DnsDomainViewSet, DnsRecordViewSet
 
 router.register(r'dnsapikeys', DnsApiKeyViewSet)
-router.register(r'dnsdomaintypes', DnsDomainTypeViewSet)
+router.register(r'dnstypes', DnsDomainTypeViewSet)
 router.register(r'dnsdomains', DnsDomainViewSet)
 router.register(r'dnsrecords', DnsRecordViewSet)
