@@ -47,10 +47,6 @@
             key: 'key'
           },
           {
-            title: 'secret',
-            key: 'secret'
-          },
-          {
             title: '类型',
             key: 'type'
           },
