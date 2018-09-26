@@ -75,14 +75,6 @@ export function deleteDnsRecord(id) {
 }
 
 // godaddydomains
-export function getGodaddyDomain(query) {
-  return axios.request({
-    url: apiUrl.godaddydomains,
-    method: 'get',
-    params: query
-  })
-}
-
 export function PostGodaddyDomain(data) {
   return axios.request({
     url: apiUrl.godaddydomains,

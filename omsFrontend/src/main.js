@@ -11,6 +11,7 @@ import importDirective from '@/directive'
 import 'iview/dist/styles/iview.css'
 import './index.less'
 import '@/assets/icons/iconfont.css'
+import * as filters from './filters' // 全局filter
 
 Vue.use(iView, {
   i18n: (key, value) => i18n.t(key, value)
@@ -24,6 +25,11 @@ Vue.prototype.$config = config
  * 注册指令
  */
 importDirective(Vue)
+
+// register global utility filters.
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 
 /* eslint-disable no-new */
 new Vue({

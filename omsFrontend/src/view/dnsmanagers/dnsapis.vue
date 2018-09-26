@@ -81,8 +81,8 @@
                   },
                   on: {
                     click: () => {
-                      this.editForm = true
-                      this.ruleForm = params.row
+                      this.dnsQuery.dnsname = params.row.name
+                      this.syncDomwin()
                     }
                   }
                 }, '同步'),
@@ -155,15 +155,9 @@
         this.fetchData()
       },
       syncDomwin() {
-        this.$message({
-          message: '正在同步中，请稍后',
-          type: 'info'
-        })
+        this.$Message.info('正在同步中，请稍后')
         PostGodaddyDomain(this.dnsQuery).then(() => {
-          this.$message({
-            message: '同步成功',
-            type: 'success'
-          })
+          this.$Message.success('同步成功')
         })
       }
     }

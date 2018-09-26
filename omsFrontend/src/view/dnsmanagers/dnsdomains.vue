@@ -23,6 +23,7 @@
 </template>
 <script>
   import {getDnsDomain} from '@/api/dnsmanager'
+  import * as filters from '@/filters'
 
   export default {
     data() {
@@ -35,19 +36,35 @@
             key: 'name'
           },
           {
-            title: '状态',
-            key: 'status'
+            title: '归属dns',
+            key: 'dnsname'
           },
           {
-            title: '域名服务商',
+            title: '类型',
             key: 'type'
-          }
+          },
+          {
+            title: '过期日期',
+            key: 'expire_time',
+            render: function (h, params) {
+              const d =  params.row.expire_time.slice(0, 10)
+              return h('a', d)
+            }
+          },
+          {
+            title: '到期天数',
+            key: 'expire_time',
+            sortable: true,
+            render: function (h, params) {
+              return h('a', filters.diffDate(params.row.expire_time))
+            }
+          },
         ],
         listQuery: {
           limit: 10,
           offset: 0,
           search: ''
-        }
+        },
       }
     },
     created() {

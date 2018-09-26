@@ -45,5 +45,5 @@ export default {
   dnstypes: '/api/dnstypes/',
   dnsdomains: '/api/dnsdomains/',
   dnsrecords: '/api/dnsrecords/',
-  godaddydomains: `${url}/api/godaddydomains/`,
+  godaddydomains: `/api/godaddydomains/`
 }
