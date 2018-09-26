@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 
 def whois(domain):
-    url = "http://whois.xinnet.com/php/domain_seo.php?domain=%s" % domain
+    url = "https://who.is/whois/%s" % domain
     html = requests.get(url).text
     d = json.loads(html)
     if d["whoisFlag"] == 'false':
