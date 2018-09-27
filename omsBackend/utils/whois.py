@@ -10,17 +10,13 @@ def whois(domain):
     url = "https://whois.tt80.xin/whoisapi?domain=%s" % domain
     html = requests.get(url, verify=False).text
     d = json.loads(html)
-    if not d:
+    if d['code'] < 0:
         create_time = datetime.now()
         expire_time = datetime.now()
-        dnsService = 'www.kiven.cn'
+        dnsService = 'invalid.domain'
     else:
-        create_time = datetime.strptime(d["creationTime"],
-                                        get_time_format(d["creationTime"])) + timedelta(
-            hours=8)
-        expire_time = datetime.strptime(d["expiryTime"],
-                                        get_time_format(d["expiryTime"])) + timedelta(
-            hours=8)
+        create_time = datetime.strptime(d["creationTime"], get_time_format(d["creationTime"])) + timedelta(hours=8)
+        expire_time = datetime.strptime(d["expiryTime"], get_time_format(d["expiryTime"])) + timedelta(hours=8)
         dnsService = d["domainnNameServer"]
 
     return {"create_time": create_time, "expire_time": expire_time, "dnsService": dnsService}

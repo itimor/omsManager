@@ -35,9 +35,8 @@ class DnsDomain(models.Model):
     name = models.CharField(max_length=20, verbose_name=u'名称')
     dnsService = models.CharField(max_length=200, null=True, blank=True, verbose_name=u'dns服务商')
     type = models.CharField(choices=Dns_Types.items(), default='godaddy', max_length=10, verbose_name=u'类型')
-    create_time = models.DateTimeField(default=timezone.now, verbose_name=u'创建时间')
-    expire_time = models.DateTimeField(default=timezone.now, verbose_name=u'过期时间')
-    update_time = models.DateTimeField(auto_now=True, verbose_name=u'更新时间')
+    create_time = models.DateField(default=timezone.now, verbose_name=u'创建时间')
+    expire_time = models.DateField(default=timezone.now, verbose_name=u'过期时间')
     desc = models.TextField(null=True, blank=True, verbose_name=u'备注')
 
     def __str__(self):

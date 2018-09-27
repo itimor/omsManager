@@ -15,7 +15,7 @@ class DnsApiKeyViewSet(viewsets.ModelViewSet):
 
 
 class DnsDomainViewSet(viewsets.ModelViewSet):
-    queryset = DnsDomain.objects.all().order_by('-update_time')
+    queryset = DnsDomain.objects.all().order_by('-expire_time')
     serializer_class = DnsDomainSerializer
     filter_fields = ['name']
     search_fields = ['name']

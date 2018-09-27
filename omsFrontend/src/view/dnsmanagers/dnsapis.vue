@@ -3,6 +3,7 @@
     <div class="head-lavel">
       <div class="table-button">
         <Button type="primary" icon="md-add" @click="addForm=true">新建</Button>
+        <Button type="success" v-show="sync" :loading="sync" style="margin-left: 10px">同步中</Button>
       </div>
       <div class="table-search">
       </div>
@@ -74,7 +75,7 @@
                 h('Button', {
                   props: {
                     type: 'primary',
-                    size: 'small'
+                    size: 'small',
                   },
                   style: {
                     marginRight: '5px'
@@ -115,6 +116,7 @@
             }
           }
         ],
+        sync: false,
         listQuery: {
           limit: 10,
           offset: 0,
@@ -156,8 +158,12 @@
       },
       syncDomwin() {
         this.$Message.info('正在同步中，请稍后')
+        this.sync = true
         PostGodaddyDomain(this.dnsQuery).then(() => {
-          this.$Message.success('同步成功')
+          this.sync = false
+        }).catch(error => {
+          const errordata = JSON.stringify(error.response.data)
+          this.$Message.error(errordata);
         })
       }
     }
