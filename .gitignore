@@ -8,6 +8,5 @@ migrations/
 *.out
 node_modules/
 package-lock.json
-*.db
 .vscode/
 site/
