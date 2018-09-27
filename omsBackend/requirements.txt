@@ -19,4 +19,5 @@ pytz==2018.5
 requests==2.19.1
 six==1.11.0
 urllib3==1.23
+uwsgi==2.0.17
 vine==1.1.4
