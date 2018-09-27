@@ -29,7 +29,7 @@ export default [
     ]
   },
   {
-    path: '/system', name: 'system', meta: {icon: 'logo-buffer', title: '系统管理'}, component: Main,
+    path: '/system', name: 'system', meta: {icon: 'md-settings', title: '系统管理'}, component: Main,
     children: [
       {
         path: 'users',

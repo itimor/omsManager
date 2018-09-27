@@ -25,26 +25,6 @@ LDAP_AUTH_SEARCH_BASE = "ou=AllUser,dc=oms,dc=com"
 LDAP_AUTH_CONNECTION_USERNAME = r'oms\admin'
 LDAP_AUTH_CONNECTION_PASSWORD = r'jjyy'
 
-# # Redis
-# REDIS_OPTIONS = {
-#     'HOST': '127.0.0.1',
-#     'PORT': 6379,
-#     'DB': 0
-# }
-# USE_REDIS = True
-# # Channel settings
-# CHANNEL_LAYERS = {
-#     "default": {
-#         # 'BACKEND': 'asgiref.inmemory.ChannelLayer',    #如果使用这个，消息变多时，会读不出来
-#          "BACKEND": "asgi_redis.RedisChannelLayer",
-#          "CONFIG": {
-#              "hosts": ['redis://{}:{}'.format(REDIS_OPTIONS['HOST'],
-#                                               REDIS_OPTIONS['PORT'])]
-#          },
-#         "ROUTING": "omsBackend.routing.channel_routing"
-#     }
-# }
-
 # email账号
 MAIL_ACOUNT = {
     "mail_host": "mail@oms.com",
@@ -85,4 +65,13 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
+}
+
+from datetime import timedelta
+CELERYBEAT_SCHEDULE = {
+    'add-every-30-seconds': {
+         'task': 'tasks.tasks.send_to_mail',
+         'schedule': timedelta(seconds=30),
+         'args': (16, 16)
+    },
 }
