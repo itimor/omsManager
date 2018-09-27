@@ -19,7 +19,7 @@ DATABASES = {
 }
 
 # 使用ldap认证
-AUTHENTICATION_BACKENDS = ("django_python3_ldap.auth.LDAPBackend",)
+#AUTHENTICATION_BACKENDS = ("django_python3_ldap.auth.LDAPBackend",)
 LDAP_AUTH_URL = "ldap://192.168.6.101:389"
 LDAP_AUTH_SEARCH_BASE = "ou=AllUser,dc=oms,dc=com"
 LDAP_AUTH_CONNECTION_USERNAME = r'oms\admin'
@@ -41,7 +41,7 @@ MAIL_ACOUNT = {
 #     'sk_pass': 'jjyy'
 # }
 # SK = Skype(SK_ACOUNT["sk_user"], SK_ACOUNT["sk_pass"])
-#SK = 'skype'
+SK = 'skype'
 
 REDIS_URL = 'redis://127.0.0.1:6379/'
 # celery配置
