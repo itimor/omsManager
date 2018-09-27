@@ -3,7 +3,7 @@
 
 import platform
 
-if platform.node() == "tboms":
+if platform.node() == "owncloud":
     print("正式环境")
     from omsBackend.settings.base import *
     from omsBackend.settings.prod import *
