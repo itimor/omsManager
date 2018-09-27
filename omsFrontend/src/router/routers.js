@@ -29,6 +29,23 @@ export default [
     ]
   },
   {
+    path: '/system', name: 'system', meta: {icon: 'logo-buffer', title: '系统管理'}, component: Main,
+    children: [
+      {
+        path: 'users',
+        name: 'users',
+        meta: {icon: 'md-bonfire', title: '用户管理'},
+        component: () => import('@/view/system/users.vue')
+      },
+      {
+        path: 'roles',
+        name: 'roles',
+        meta: {icon: 'md-bonfire', title: '角色管理'},
+        component: () => import('@/view/system/roles.vue')
+      }
+    ]
+  },
+  {
     path: '/dnsmanagers', name: 'dnsmanagers', meta: {icon: 'logo-buffer', title: '域名管理'}, component: Main,
     children: [
       {

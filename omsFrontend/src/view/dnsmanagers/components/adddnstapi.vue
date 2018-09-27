@@ -14,7 +14,7 @@
     </FormItem>
     <FormItem label="类型" prop="type">
       <Select v-model="ruleForm.type">
-        <Option v-for="item in Dns_Types" :value="item" :key="item">{{ item }}</Option>
+        <Option v-for="item in Dns_Types" :key="item" :value="item">{{ item }}</Option>
       </Select>
     </FormItem>
     <FormItem>

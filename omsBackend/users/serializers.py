@@ -7,6 +7,7 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
     roles = serializers.SlugRelatedField(many=True, queryset=Role.objects.all(), slug_field='name', allow_null=True)
+    skype = serializers.CharField(allow_null=True)
 
     class Meta:
         model = User

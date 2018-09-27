@@ -7,21 +7,21 @@ from datetime import datetime, timedelta
 
 
 def whois(domain):
-    url = "https://who.is/whois/%s" % domain
-    html = requests.get(url).text
+    url = "https://whois.tt80.xin/whoisapi?domain=%s" % domain
+    html = requests.get(url, verify=False).text
     d = json.loads(html)
-    if d["whoisFlag"] == 'false':
+    if not d:
         create_time = datetime.now()
         expire_time = datetime.now()
         dnsService = 'www.kiven.cn'
     else:
-        create_time = datetime.strptime(d["whois_registrantDate"],
-                                        get_time_format(d["whois_registrantDate"])) + timedelta(
+        create_time = datetime.strptime(d["creationTime"],
+                                        get_time_format(d["creationTime"])) + timedelta(
             hours=8)
-        expire_time = datetime.strptime(d["whois_expirationDate"],
-                                        get_time_format(d["whois_expirationDate"])) + timedelta(
+        expire_time = datetime.strptime(d["expiryTime"],
+                                        get_time_format(d["expiryTime"])) + timedelta(
             hours=8)
-        dnsService = '|'.join(d["whois_dnsService"])
+        dnsService = d["domainnNameServer"]
 
     return {"create_time": create_time, "expire_time": expire_time, "dnsService": dnsService}
 
