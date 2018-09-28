@@ -40,8 +40,9 @@ class GodaddyDomainViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def post(self, request):
-        dnsinfo = DnsApiKey.objects.get(name=request.data['dnsname'])
         dnsname = request.data['dnsname']
+        dnsinfo = DnsApiKey.objects.get(name=dnsname)
         print(dnsinfo)
+        print(dnsname)
         post_godaddy_domain.delay(dnsinfo, dnsname)
         return Response({'status': 'success'})
