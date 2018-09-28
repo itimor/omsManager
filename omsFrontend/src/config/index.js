@@ -14,7 +14,7 @@ export default {
    */
   baseUrl: {
     dev: 'http://127.0.0.1:8000',
-    pro: 'https://produce.com'
+    pro: 'http://oms.e-veb.info'
   },
 
   // 表格数据
