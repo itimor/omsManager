@@ -25,8 +25,8 @@ def print(x, y):
 
 
 @shared_task
-def post_godaddy_domain(dnsinfo, dnsname):
-    dnsapi = GodaddyApi(dnsinfo.key, dnsinfo.secret)
+def post_godaddy_domain(key, secret, dnsname):
+    dnsapi = GodaddyApi(key, secret)
     query = dnsapi.get_domains()
     for item in query:
         dnsdomain = dict()
