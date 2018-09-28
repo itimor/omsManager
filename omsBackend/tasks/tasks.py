@@ -29,6 +29,7 @@ def post_godaddy_domain(key, secret, dnsname):
     dnsapi = GodaddyApi(key, secret)
     query = dnsapi.get_domains()
     for item in query:
+        print(f'domain: {item}')
         dnsdomain = dict()
         dnsdomain['dnsname'] = dnsname
         dnsdomain['type'] = 'godaddy'

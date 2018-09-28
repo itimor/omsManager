@@ -141,7 +141,7 @@
         this.fetchData()
       },
       changePage(page) {
-        this.listQuery.offset = page - 1
+        this.listQuery.offset = (page - 1) * this.listQuery.limit
         this.fetchData()
       },
       changePagesize(size) {
