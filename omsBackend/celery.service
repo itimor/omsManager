@@ -2,7 +2,7 @@
 Description=start celery worker
 
 [Service]
-ExecStart=/bin/bash -c 'cd /data/projects/opsEveb//omsBackend; /root/.pyenv/versions/envoms/bin/celery -A omsBackend worker -B --loglevel=info --pool=eventlet -f /data/logs/celery.log'
+ExecStart=/bin/bash -c 'cd /data/projects/opsEveb//omsBackend; /root/.pyenv/versions/envoms/bin/celery -A omsBackend worker -B --loglevel=info -f /data/logs/celery.log'
 #非正常dead，自动重启
 Restart=on-failure
 #3秒后启动
