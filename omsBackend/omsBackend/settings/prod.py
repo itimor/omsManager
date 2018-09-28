@@ -69,8 +69,8 @@ CACHES = {
 
 from datetime import timedelta
 CELERYBEAT_SCHEDULE = {
-    'add-every-30-seconds': {
-         'task': 'tasks.tasks.send_to_mail',
+    'every-30-seconds': {
+         'task': 'tasks.tasks.print',
          'schedule': timedelta(seconds=30),
          'args': (16, 16)
     },

@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from dnsmanager.models import DnsApiKey, DnsDomain, DnsRecord
 from dnsmanager.serializers import DnsApiKeySerializer, DnsDomainSerializer, DnsRecordSerializer, GodaddyDomainSerializer
 from dnsmanager.godaddy_api import GodaddyApi
+from tasks.tasks import post_godaddy_domain
 
 
 class DnsApiKeyViewSet(viewsets.ModelViewSet):
@@ -40,12 +41,14 @@ class GodaddyDomainViewSet(viewsets.ViewSet):
 
     def post(self, request):
         dnsinfo = DnsApiKey.objects.get(name=request.data['dnsname'])
-        dnsapi = GodaddyApi(dnsinfo.key, dnsinfo.secret)
-        query = dnsapi.get_domains()
-        for item in query:
-            dnsdomain = dict()
-            dnsdomain['dnsname'] = request.data['dnsname']
-            dnsdomain['type'] = 'godaddy'
-            dnsdomain['name'] = item['domain']
-            d, create = DnsDomain.objects.update_or_create(name=dnsdomain['name'], defaults=dnsdomain)
-        return Response({'status': create})
+        dnsname = request.data['dnsname']
+        post_godaddy_domain.delay(dnsinfo, dnsname)
+        # dnsapi = GodaddyApi(dnsinfo.key, dnsinfo.secret)
+        # query = dnsapi.get_domains()
+        # for item in query:
+        #     dnsdomain = dict()
+        #     dnsdomain['dnsname'] = request.data['dnsname']
+        #     dnsdomain['type'] = 'godaddy'
+        #     dnsdomain['name'] = item['domain']
+        #     d, create = DnsDomain.objects.update_or_create(name=dnsdomain['name'], defaults=dnsdomain)
+        return Response({'status': 'success'})
