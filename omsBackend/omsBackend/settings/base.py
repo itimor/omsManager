@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_filters',  # 过滤
     'corsheaders',  # 跨域
     'dry_rest_permissions',  # 权限
+    'django_celery_results',  # celery results
     'tools',
     'users',
     'dnsmanager',
