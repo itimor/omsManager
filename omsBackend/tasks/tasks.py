@@ -5,7 +5,7 @@ from celery import shared_task
 from utils.sendskype import skype_bot
 from utils.sendmail import send_mail
 from dnsmanager.godaddy_api import GodaddyApi
-from dnsmanager.models import DnsApiKey, DnsDomain
+from dnsmanager.models import DnsDomain
 
 
 @shared_task
@@ -26,6 +26,7 @@ def print(x, y):
 
 @shared_task
 def post_godaddy_domain(dnsinfo, dnsname):
+    print(dnsinfo)
     dnsapi = GodaddyApi(dnsinfo.key, dnsinfo.secret)
     query = dnsapi.get_domains()
     for item in query:

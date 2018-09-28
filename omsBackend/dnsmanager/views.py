@@ -43,12 +43,4 @@ class GodaddyDomainViewSet(viewsets.ViewSet):
         dnsinfo = DnsApiKey.objects.get(name=request.data['dnsname'])
         dnsname = request.data['dnsname']
         post_godaddy_domain.delay(dnsinfo, dnsname)
-        # dnsapi = GodaddyApi(dnsinfo.key, dnsinfo.secret)
-        # query = dnsapi.get_domains()
-        # for item in query:
-        #     dnsdomain = dict()
-        #     dnsdomain['dnsname'] = request.data['dnsname']
-        #     dnsdomain['type'] = 'godaddy'
-        #     dnsdomain['name'] = item['domain']
-        #     d, create = DnsDomain.objects.update_or_create(name=dnsdomain['name'], defaults=dnsdomain)
         return Response({'status': 'success'})
