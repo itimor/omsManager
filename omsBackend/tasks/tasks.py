@@ -21,6 +21,8 @@ def send_to_mail(to_list, cc_list, sub, content):
 @shared_task
 def tty(x, y):
     print("123")
+    print(x, y)
+    return x + y
 
 
 @shared_task
