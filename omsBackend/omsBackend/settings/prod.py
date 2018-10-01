@@ -2,6 +2,7 @@
 # author: kiven
 
 import os
+
 DEBUG = False
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -19,7 +20,7 @@ DATABASES = {
 }
 
 # 使用ldap认证
-#AUTHENTICATION_BACKENDS = ("django_python3_ldap.auth.LDAPBackend",)
+# AUTHENTICATION_BACKENDS = ("django_python3_ldap.auth.LDAPBackend",)
 LDAP_AUTH_URL = "ldap://192.168.6.101:389"
 LDAP_AUTH_SEARCH_BASE = "ou=AllUser,dc=oms,dc=com"
 LDAP_AUTH_CONNECTION_USERNAME = r'oms\admin'
@@ -34,7 +35,7 @@ MAIL_ACOUNT = {
 }
 
 # skype账号
-#from skpy import Skype
+# from skpy import Skype
 
 # SK_ACOUNT = {
 #     'sk_user': 'admin@oms.com',
@@ -68,9 +69,15 @@ CACHES = {
 }
 
 from datetime import timedelta
+from celery.schedules import crontab
+
 CELERYBEAT_SCHEDULE = {
-    'every-30-seconds': {
-         'task': 'tasks.tasks.tty',
-         'schedule': timedelta(seconds=3)
+    'add-30-seconds': {
+        'task': 'tasks.tasks.tty',
+        'schedule': timedelta(seconds=3)
     },
+    'add-every-day': {
+        'task': 'tasks.tasks.tty',
+        'schedule': crontab(hour=17, minute=50)
+    }
 }
