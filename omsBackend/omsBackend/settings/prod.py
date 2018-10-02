@@ -73,11 +73,11 @@ from celery.schedules import crontab
 
 CELERYBEAT_SCHEDULE = {
     'add-30-seconds': {
-        'task': 'tasks.tasks.tty',
+        'task': 'tasks.tty',
         'schedule': timedelta(seconds=3)
     },
     'add-every-day': {
-        'task': 'tasks.tasks.tty',
-        'schedule': crontab(hour=17, minute=50)
+        'task': 'tasks.tty',
+        'schedule': crontab(hour=10, minute=10)
     }
 }
