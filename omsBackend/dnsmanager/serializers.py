@@ -31,3 +31,5 @@ class GodaddyDomainSerializer(serializers.Serializer):
     domain = serializers.CharField()
     status = serializers.CharField()
     createdAt = serializers.DateTimeField()
+
+

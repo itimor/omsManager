@@ -152,16 +152,16 @@ class BotAPI(object):
 if __name__ == '__main__':
     bot_info = {
         "grant_type": "client_credentials",
-        "client_id": "43ceb722-a3a5-4de3-9f31-2e04dd89efc4",
+        "client_id": "42ceb722-b3b5-4dc3-9f31-1e04dd84efc4",
         "client_secret": "tCM6526@ifokqgTABTN4=_{",
         "scope": "https://api.botframework.com/.default"
     }
     bot = BotAPI(bot_info['client_id'], bot_info['client_secret'])
-    sender = '19:629c0056c46f435291b24339fed22a09@thread.skype'
+    sender = 'live:beab271396d351d9'
 
     # send message
-    message = "你好！很高兴认识你"
-    # bot.send_message(sender, message)
+    message = "老哥好！很高兴认识你"
+    bot.send_message(sender, message)
 
     # send imgae
     url1 = 'http://s5.sinaimg.cn/mw690/003PHSZvgy6Yw3HTXikf4'
@@ -175,7 +175,7 @@ if __name__ == '__main__':
     button2 = bot.create_buttons("openUrl", "更多我", "https://www.nvshens.com/g/26067/")
     attachment1 = bot.create_card_attachment("hero", "夏美酱", subtitle="性感女神", text="童颜巨乳", images=[img1], buttons=[button1, button2])
     attachment2 = bot.create_card_attachment("hero", "夏美酱", subtitle="性感女神", text="国色天香", images=[img2], buttons=[button1, button2])
-    bot.send_card(sender, "carousel", [attachment1, attachment2], summary=message, text="夏美酱")
+    # bot.send_card(sender, "carousel", [attachment1, attachment2], summary=message, text="夏美酱")
 
     # send action
     #bot.send_action(sender)

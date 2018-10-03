@@ -190,9 +190,7 @@ class GodaddyApi(object):
 
 
 if __name__ == '__main__':
-    from dnsapi_conf import GODADDY_KEYINFO
-
-    godaddy = GodaddyApi(GODADDY_KEYINFO['key'], GODADDY_KEYINFO['secret'])
+    godaddy = GodaddyApi('9u7CEprrUCG_BqmjC1VepzeAmx8ZdAA8ZR', 'BqmnEb66RpuNdC8EkgQFfH')
     record = {
         'type': 'A',
         'name': 'aaa',
@@ -202,4 +200,4 @@ if __name__ == '__main__':
     records = [{'data': '1.1.1.123', 'name': 'blog', 'ttl': 3600, 'type': 'A'},
                {'type': 'A', 'name': 'ggg', 'data': '1.1.1.2', 'ttl': 600}
                ]
-    print(godaddy.update_record('918168.net', 'aaa', '1.1.1.5', 'A', 3600))
+    print(godaddy.get_domains())
