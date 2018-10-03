@@ -26,13 +26,13 @@ class XMLHandler(xml.sax.handler.ContentHandler):
 
 
 class NameSiloApi:
-    def __init__(self, keys):
+    def __init__(self, key, secret):
         """
         :param urls: API的URL
         :param keys: 用于验证的key
         """
         self.url = 'https://www.namesilo.com/api'
-        self.params = {'version': '1', 'type': 'xml', 'key': keys}
+        self.params = {'version': '1', 'type': 'xml', 'key': secret}
         self.xh = XMLHandler()
 
     def _request_api_data(self, operating):
@@ -101,8 +101,8 @@ class NameSiloApi:
 
 
 if __name__ == '__main__':
-    key = "d4efac6c29fa9ac6b77d2cc"
+    secret = "d4efac6c29fa9ac6b77d2cc"
 
-    n = NameSiloApi(key)
+    n = NameSiloApi(1, secret)
     dt1 = n.get_domains()
     print(dt1)
