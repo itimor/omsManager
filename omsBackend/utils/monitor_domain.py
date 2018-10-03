@@ -99,7 +99,7 @@ def send_mail(MAIL_ACOUNT, to_list, sub, content):
 
 
 if __name__ == '__main__':
-    url = 'http://127.0.0.1:8000/api/'
+    url = 'http://oms.e-veb.info/api/'
     username = "admin"
     password = "qwert@12345"
     oms = OMSAPI(url, username, password)
@@ -123,4 +123,6 @@ if __name__ == '__main__':
     to_list = 'kiven@e-veb.com'
     sub = '过期域名'
     if expire_domains:
-        send_mail(MAIL_ACOUNT, to_list, sub, json.dumps(expire_domains))
+        print(send_mail(MAIL_ACOUNT, to_list, sub, json.dumps(expire_domains)))
+    else:
+        print("not found will expire domains")
