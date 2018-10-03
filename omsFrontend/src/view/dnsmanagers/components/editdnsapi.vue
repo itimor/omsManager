@@ -47,7 +47,7 @@
             {required: true, message: 'The select cannot be empty', trigger: 'change'},
           ]
         },
-        Dns_Types: ['dnspod', 'godaddy', 'bind']
+        Dns_Types: ['dnspod', 'godaddy', 'namesilo']
       }
     },
     methods: {

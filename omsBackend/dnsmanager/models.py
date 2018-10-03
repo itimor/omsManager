@@ -7,7 +7,7 @@ from django.utils import timezone
 Dns_Types = {
     'godaddy': 'godaddy',
     'dnspod': 'dnspod',
-    'bind': 'bind',
+    'namesilo': 'namesilo',
 }
 
 

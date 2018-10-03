@@ -26,10 +26,5 @@ class DnsRecordSerializer(serializers.ModelSerializer):
                   'use', 'desc']
 
 
-class GodaddyDomainSerializer(serializers.Serializer):
-    domainId = serializers.IntegerField()
+class CustomDomainSerializer(serializers.Serializer):
     domain = serializers.CharField()
-    status = serializers.CharField()
-    createdAt = serializers.DateTimeField()
-
-
