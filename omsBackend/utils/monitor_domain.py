@@ -107,7 +107,7 @@ if __name__ == '__main__':
     expire_domains = []
     for domain in domains:
         if count_expire(domain['expire_time']):
-            print(f'{domain["name"]} expire')
+            print('{} expire'.format(domain["name"]))
             expire_domains.append({"name": domain["name"], "expire_time": domain["expire_time"], "type": domain["type"],
                                    "account": domain["dnsname"]})
         else:
