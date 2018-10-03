@@ -82,3 +82,12 @@ export function PostGodaddyDomain(data) {
     data
   })
 }
+
+// namesilodomains
+export function PostNamesiloDomain(data) {
+  return axios.request({
+    url: apiUrl.namesilodomains,
+    method: 'post',
+    data
+  })
+}

@@ -17,9 +17,10 @@ router.register(r'sendmail', SendmailViewSet)
 router.register(r'sendmessage', SendmessageViewSet)
 router.register(r'fileupload', FileUploadViewSet)
 
-from dnsmanager.views import DnsApiKeyViewSet, DnsDomainViewSet, DnsRecordViewSet, GodaddyDomainViewSet
+from dnsmanager.views import DnsApiKeyViewSet, DnsDomainViewSet, DnsRecordViewSet, GodaddyDomainViewSet, NamesiloDomainViewSet
 
 router.register(r'dnsapikeys', DnsApiKeyViewSet)
 router.register(r'dnsdomains', DnsDomainViewSet)
 router.register(r'dnsrecords', DnsRecordViewSet)
 router.register(r'godaddydomains', GodaddyDomainViewSet, base_name='godaddydomains')
+router.register(r'namesilodomains', NamesiloDomainViewSet, base_name='namesilodomains')

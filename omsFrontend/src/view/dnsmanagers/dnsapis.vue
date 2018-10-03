@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-  import {getDnsApi, deleteDnsApi, PostGodaddyDomain} from '@/api/dnsmanager'
+  import {getDnsApi, deleteDnsApi, PostGodaddyDomain, PostNamesiloDomain} from '@/api/dnsmanager'
   import addGroup from './components/adddnstapi.vue'
   import editGroup from './components/editdnsapi.vue'
 
@@ -159,12 +159,22 @@
       syncDomwin() {
         this.$Message.info('正在同步中，请稍后')
         this.sync = true
-        PostGodaddyDomain(this.dnsQuery).then(() => {
-          this.sync = false
-        }).catch(error => {
-          const errordata = JSON.stringify(error.response.data)
-          this.$Message.error(errordata);
-        })
+        if (this.dnsQuery.dnsname === 'godaddy') {
+          PostGodaddyDomain(this.dnsQuery).then(() => {
+            this.sync = false
+          }).catch(error => {
+            const errordata = JSON.stringify(error.response.data)
+            this.$Message.error(errordata);
+          })
+        } else if (this.dnsQuery.dnsname === 'namesilo') {
+          PostNamesiloDomain(this.dnsQuery).then(() => {
+            this.sync = false
+          }).catch(error => {
+            const errordata = JSON.stringify(error.response.data)
+            this.$Message.error(errordata);
+          })
+        }
+
       }
     }
   }
