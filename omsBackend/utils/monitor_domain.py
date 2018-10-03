@@ -65,9 +65,9 @@ def count_expire(expire_time, safe_day=30):
     d_day = datetime.datetime.strptime(expire_time, '%Y-%m-%d')
     d_diff = (d_day - s_day).days
     if d_diff < safe_day:
-        return False
-    else:
         return True
+    else:
+        return False
 
 
 if __name__ == '__main__':
@@ -75,4 +75,16 @@ if __name__ == '__main__':
     username = "admin"
     password = "qwert@12345"
     oms = OMSAPI(url, username, password)
-    print(oms.get_domains())
+    domains = oms.get_domains()
+    expire_domains = []
+    for domain in domains:
+        if count_expire(domain['expire_time']):
+            print(f'{domain["name"]} expire')
+            expire_domains.append(domain)
+        else:
+            print(f'{domain["name"]} ok')
+
+        import time
+        time.sleep(1)
+
+    print(expire_domains)
