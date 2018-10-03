@@ -111,7 +111,7 @@ if __name__ == '__main__':
             expire_domains.append({"name": domain["name"], "expire_time": domain["expire_time"], "type": domain["type"],
                                    "account": domain["dnsname"]})
         else:
-            print(f'{domain["name"]} ok')
+            print('{} ok'.format(domain["name"]))
 
     # 发送邮件
     MAIL_ACOUNT = {
