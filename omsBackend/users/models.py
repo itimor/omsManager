@@ -33,7 +33,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     username = models.CharField(max_length=32, unique=True, db_index=True)
     email = models.EmailField(max_length=255, null=True, blank=True)
-    avator = models.CharField(max_length=255, default='https://avatars0.githubusercontent.com/u/20942571?s=460&v=4')
+    avator = models.CharField(max_length=255, default='http://ask.rednet.cn/uploads/answer/20160602/5a6b156af6661779840dd6b28e7e1898.jpg')
     skype = models.CharField(max_length=255, null=True, blank=True)
     roles = models.ManyToManyField('Role', blank=True, verbose_name=u'角色')
     create_date = models.DateField(auto_now=True, verbose_name=u'创建时间')
