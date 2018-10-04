@@ -3,6 +3,10 @@
     <div class="head-lavel">
       <div class="table-button">
         <Button type="primary" icon="md-add" @click="addForm=true">新建</Button>
+        <Poptip trigger="hover">
+          <Avatar>USER</Avatar>
+          <img slot="content" src="http://ask.rednet.cn/uploads/answer/20160602/5a6b156af6661779840dd6b28e7e1898.jpg">
+        </Poptip>
       </div>
       <div class="table-search">
       </div>
@@ -50,11 +54,27 @@
             title: '头像',
             key: 'avator',
             render: (h, params) => {
-              return h('Avatar', {
+              return h('Poptip', {
                 props: {
-                  src: params.row.avator,
+                  trigger: 'click',
+                  transfer: true,
                 },
-              })
+              }, [
+                h('img', {
+                  attrs: {
+                    src: params.row.avator
+                  },
+                  style: {
+                    width: '200px'
+                  },
+                  slot: 'content'
+                }),
+                h('Avatar', {
+                  props: {
+                    src: params.row.avator,
+                  }
+                })
+              ])
             }
           },
           {
@@ -127,27 +147,32 @@
     },
     created() {
       this.fetchData()
-    },
+    }
+    ,
     methods: {
       fetchData() {
         getUser(this.listQuery).then(res => {
           this.tableData = res.data.results
           this.tableCount = res.data.count
         })
-      },
+      }
+      ,
       getDialogStatus(data) {
         this.addForm = data
         this.editForm = data
         this.fetchData()
-      },
+      }
+      ,
       changePage(page) {
         this.listQuery.offset = (page - 1) * this.listQuery.limit
         this.fetchData()
-      },
+      }
+      ,
       changePagesize(size) {
         this.listQuery.limit = size
         this.fetchData()
-      },
+      }
+      ,
       searchClick() {
         this.fetchData()
       }
