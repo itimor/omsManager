@@ -28,7 +28,6 @@
   import {getUser, deleteUser} from '@/api/user'
   import addGroup from './components/adduser.vue'
   import editGroup from './components/edituser.vue'
-  import {mapGetters} from 'vuex'
 
   export default {
     components: {
@@ -125,7 +124,6 @@
                     props: {
                       type: 'error',
                       size: 'small',
-                      disabled: this.roles.indexOf('admin') > -1 ? false : true
                     }
                   }, '删除')
                 ]),
@@ -146,35 +144,26 @@
     created() {
       this.fetchData()
     },
-    computed: {
-      ...mapGetters([
-        'roles'
-      ]),
-    },
     methods: {
       fetchData() {
         getUser(this.listQuery).then(res => {
           this.tableData = res.data.results
           this.tableCount = res.data.count
         })
-      }
-      ,
+      },
       getDialogStatus(data) {
         this.addForm = data
         this.editForm = data
         this.fetchData()
-      }
-      ,
+      },
       changePage(page) {
         this.listQuery.offset = (page - 1) * this.listQuery.limit
         this.fetchData()
-      }
-      ,
+      },
       changePagesize(size) {
         this.listQuery.limit = size
         this.fetchData()
-      }
-      ,
+      },
       searchClick() {
         this.fetchData()
       }
