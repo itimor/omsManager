@@ -43,6 +43,7 @@ class GodaddyDomainViewSet(viewsets.ViewSet):
     def post(self, request):
         dnsname = request.data['dnsname']
         dnsinfo = DnsApiKey.objects.get(name=dnsname)
+        print(dnsinfo)
         post_godaddy_domain.delay(dnsinfo.key, dnsinfo.secret, dnsname)
         return Response({'status': 'success'})
 
@@ -60,5 +61,6 @@ class NamesiloDomainViewSet(viewsets.ViewSet):
     def post(self, request):
         dnsname = request.data['dnsname']
         dnsinfo = DnsApiKey.objects.get(name=dnsname)
+        print(dnsinfo)
         post_namesilo_domain.delay(dnsinfo.key, dnsinfo.secret, dnsname)
         return Response({'status': 'success'})
