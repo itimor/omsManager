@@ -120,7 +120,7 @@ if __name__ == '__main__':
         "mail_pass": "ouci4fae3Oow9vohZoh7o",
         "mail_postfix": "e-veb.com",
     }
-    to_list = 'server@e-veb.com'
+    to_list = 'kiven@e-veb.com,toby@e-veb.com'
     sub = '过期域名'
     if expire_domains:
         print(send_mail(MAIL_ACOUNT, to_list, sub, json.dumps(expire_domains)))
