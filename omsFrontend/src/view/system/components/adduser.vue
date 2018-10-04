@@ -42,7 +42,7 @@
         ruleForm: {
           username: '',
           email: '',
-          avator: 'https://avatars0.githubusercontent.com/u/20942571?s=460&v=4',
+          avator: 'http://ask.rednet.cn/uploads/answer/20160602/5a6b156af6661779840dd6b28e7e1898.jpg',
           skype: null,
           password: '',
           roles: [],
