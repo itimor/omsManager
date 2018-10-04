@@ -53,7 +53,7 @@
               return h('Poptip', {
                 props: {
                   transfer: true,
-                  trigger: 'click',
+                  trigger: 'hover',
                 },
               }, [
                 h('img', {
