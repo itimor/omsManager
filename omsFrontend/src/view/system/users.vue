@@ -28,6 +28,7 @@
   import {getUser, deleteUser} from '@/api/user'
   import addGroup from './components/adduser.vue'
   import editGroup from './components/edituser.vue'
+  import {mapGetters} from 'vuex'
 
   export default {
     components: {
@@ -144,8 +145,12 @@
     },
     created() {
       this.fetchData()
-    }
-    ,
+    },
+    computed: {
+      ...mapGetters([
+        'roles'
+      ]),
+    },
     methods: {
       fetchData() {
         getUser(this.listQuery).then(res => {

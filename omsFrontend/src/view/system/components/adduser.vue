@@ -35,7 +35,6 @@
 </template>
 <script>
   import {postUser, getRole} from '@/api/user'
-  import {mapGetters} from 'vuex'
 
   export default {
     data() {
@@ -68,11 +67,6 @@
     },
     created() {
       this.fetchRoleData()
-    },
-    computed: {
-      ...mapGetters([
-        'roles'
-      ]),
     },
     methods: {
       submitForm(name) {
