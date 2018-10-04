@@ -3,10 +3,6 @@
     <div class="head-lavel">
       <div class="table-button">
         <Button type="primary" icon="md-add" @click="addForm=true">新建</Button>
-        <Poptip trigger="hover">
-          <Avatar>USER</Avatar>
-          <img slot="content" src="http://ask.rednet.cn/uploads/answer/20160602/5a6b156af6661779840dd6b28e7e1898.jpg">
-        </Poptip>
       </div>
       <div class="table-search">
       </div>
