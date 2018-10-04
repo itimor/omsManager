@@ -123,7 +123,8 @@
                   h('Button', {
                     props: {
                       type: 'error',
-                      size: 'small'
+                      size: 'small',
+                      disabled: this.roles.indexOf('admin') > -1 ? false : true
                     }
                   }, '删除')
                 ]),

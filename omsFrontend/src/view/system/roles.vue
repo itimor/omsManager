@@ -28,6 +28,7 @@
   import {getRole, deleteRole} from '@/api/user'
   import addGroup from './components/addrole.vue'
   import editGroup from './components/editrole.vue'
+  import {mapGetters} from 'vuex'
 
   export default {
     components: {
@@ -88,7 +89,8 @@
                   h('Button', {
                     props: {
                       type: 'error',
-                      size: 'small'
+                      size: 'small',
+                      disabled: this.roles.indexOf('admin') > -1 ? false : true
                     }
                   }, '删除')
                 ]),
@@ -108,6 +110,11 @@
     },
     created() {
       this.fetchData()
+    },
+    computed: {
+      ...mapGetters([
+        'roles'
+      ]),
     },
     methods: {
       fetchData() {
