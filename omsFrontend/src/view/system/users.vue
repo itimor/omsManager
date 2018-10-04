@@ -56,8 +56,8 @@
             render: (h, params) => {
               return h('Poptip', {
                 props: {
-                  trigger: 'click',
                   transfer: true,
+                  trigger: 'click',
                 },
               }, [
                 h('img', {
