@@ -18,6 +18,9 @@ export default {
       state.username = username
       setUsername(username)
     },
+    setRole(state, roles) {
+      state.roles = roles
+    },
     setAccess(state, access) {
       state.access = access
     },
@@ -69,6 +72,7 @@ export default {
         getUser(userinfo).then(res => {
           const data = res.data[0]
           commit('setAvator', data.avator)
+          commit('setRole', data.roles)
           commit('setUsername', data.username)
           commit('setAccess', data.access)
           resolve(data)

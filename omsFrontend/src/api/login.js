@@ -2,7 +2,6 @@ import axios from '@/libs/api.request'
 import apiURL from '@/config'
 
 export const login = (data) => {
-  console.log(apiURL.login)
   return axios.request({
     url: apiURL.login,
     method: 'post',
@@ -18,7 +17,6 @@ export const logout = () => {
 }
 
 export const changePassword = (data) => {
-  console.log(data)
   return axios.request({
     url: apiURL.changePassword,
     method: 'post',

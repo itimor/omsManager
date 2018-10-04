@@ -47,7 +47,7 @@
             title: '过期日期',
             key: 'expire_time',
             render: function (h, params) {
-              const d =  params.row.expire_time.slice(0, 10)
+              const d = params.row.expire_time.slice(0, 10)
               return h('a', d)
             }
           },

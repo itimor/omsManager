@@ -29,6 +29,7 @@
   import {getDnsApi, deleteDnsApi, PostGodaddyDomain, PostNamesiloDomain} from '@/api/dnsmanager'
   import addGroup from './components/adddnstapi.vue'
   import editGroup from './components/editdnsapi.vue'
+  import {mapGetters} from 'vuex'
 
   export default {
     components: {
@@ -108,7 +109,8 @@
                   h('Button', {
                     props: {
                       type: 'error',
-                      size: 'small'
+                      size: 'small',
+                      disabled: this.roles.indexOf('admin') > -1 ? false : true
                     }
                   }, '删除')
                 ]),
@@ -132,6 +134,11 @@
     },
     created() {
       this.fetchData()
+    },
+    computed: {
+      ...mapGetters([
+        'roles'
+      ]),
     },
     methods: {
       fetchData() {
