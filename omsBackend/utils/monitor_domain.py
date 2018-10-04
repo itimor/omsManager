@@ -82,7 +82,50 @@ def send_mail(MAIL_ACOUNT, to_list, sub, content):
     msg['Subject'] = sub
     msg['From'] = me
     msg['To'] = to_list
-    context = MIMEText(content, _subtype='html', _charset='utf-8')  # 解决乱码
+
+    # 构造tr
+    trs = ''
+    for i in content:
+        trs += """
+        <tr>
+        <td> """ + i["name"] + """ </td>
+        <td> """ + str(i["expire_time"]) + """ </td>
+        <td> """ + i["type"] + """ </td>
+        <td> """ + i["account"] + """ </td>
+        </tr>
+        """
+
+    # 构造html
+    d = datetime.datetime.now()
+
+    html = """
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>域名过期查询</title>
+    <body>
+    <div id="container">
+      <p><strong>域名过期查询</strong></p>
+      <p>查询时间: {}</p>
+      <div id="content">
+       <table width="500" border="2" bordercolor="red" cellspacing="2">
+      <tr>
+        <td><strong>域名</strong></td>
+        <td><strong>过期时间</strong></td>
+        <td><strong>域名服务商</strong></td>
+        <td><strong>归属账号</strong></td>
+      </tr>
+      {}
+    </table>
+      </div>
+    </div>
+    <p><strong>http://oms.e-veb.info/#/dnsmanagers/dnsdomains</strong> </p>
+    </div>
+    </body>
+    </html>
+            """.format(d, trs)
+
+    context = MIMEText(html, _subtype='html', _charset='utf-8')  # 解决乱码
     msg.attach(context)
     try:
         smtpserver = smtplib.SMTP(MAIL_ACOUNT["mail_host"], 587)
@@ -123,6 +166,6 @@ if __name__ == '__main__':
     to_list = 'kiven@e-veb.com,toby@e-veb.com'
     sub = '过期域名'
     if expire_domains:
-        print(send_mail(MAIL_ACOUNT, to_list, sub, json.dumps(expire_domains)))
+        print(send_mail(MAIL_ACOUNT, to_list, sub, expire_domains))
     else:
         print("not found will expire domains")
