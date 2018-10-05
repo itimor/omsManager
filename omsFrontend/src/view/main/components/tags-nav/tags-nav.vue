@@ -25,7 +25,7 @@
             @on-close="handleClose(item)"
             @click.native="handleClick(item)"
             :closable="item.name !== 'home'"
-            :color="isCurrentTag(item) ? 'primary' : 'default'"
+            :color="isCurrentTag(item) ? 'success' : 'default'"
             @contextmenu.prevent.native="contextMenu(item, $event)"
           >{{ showTitleInside(item) }}</Tag>
         </transition-group>

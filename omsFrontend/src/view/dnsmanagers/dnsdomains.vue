@@ -12,8 +12,9 @@
         </Input>
       </div>
     </div>
-    <Table border stripe :data="tableData" :columns="tablecolumns"></Table>
+    <Table border stripe :data="tableData" :columns="tablecolumns" ref="table"></Table>
     <div style="margin: 10px;overflow: hidden">
+      <Button type="primary" size="large" @click="exportData"><Icon type="ios-download-outline"></Icon>导出为表格</Button>
       <div style="float: right;">
         <Page :total="tableCount" :current="1" show-total show-sizer
               @on-change="changePage" @on-page-size-change="changePagesize"></Page>
@@ -87,6 +88,11 @@
       },
       searchClick() {
         this.fetchData()
+      },
+      exportData() {
+        this.$refs.table.exportCsv({
+          filename: '域名列表'
+        })
       }
     }
   }
