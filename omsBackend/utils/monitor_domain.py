@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # author: kiven
 
-import requests
 import datetime
-import json
 import smtplib
-from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+import requests
 
 
 class OMSAPI(object):
@@ -81,7 +81,7 @@ def send_mail(MAIL_ACOUNT, to_list, sub, content):
     msg = MIMEMultipart('alternative')
     msg['Subject'] = sub
     msg['From'] = me
-    msg['To'] = to_list
+    msg['To'] = ','.join(to_list)
 
     # 构造tr
     trs = ''
@@ -163,7 +163,8 @@ if __name__ == '__main__':
         "mail_pass": "ouci4fae3Oow9vohZoh7o",
         "mail_postfix": "e-veb.com",
     }
-    to_list = 'kiven@e-veb.com,toby@e-veb.com'
+
+    to_list = ['bruce@e-veb.com', 'toby@e-veb.com', ]
     sub = '过期域名'
     if expire_domains:
         print(send_mail(MAIL_ACOUNT, to_list, sub, expire_domains))
