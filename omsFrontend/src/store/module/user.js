@@ -31,15 +31,11 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin({commit}, {username, password}) {
-      username = username.trim()
+    handleLogin({commit}, userdata) {
       return new Promise((resolve, reject) => {
-        login({
-          username,
-          password
-        }).then(res => {
+        login(userdata).then(res => {
           const data = res.data
-          commit('setUsername', username)
+          commit('setUsername', userdata.username)
           commit('setToken', data.token)
           resolve()
         }).catch(err => {
