@@ -84,6 +84,7 @@
                   on: {
                     click: () => {
                       this.dnsQuery.dnsname = params.row.name
+                      this.dnsQuery.type = params.row.type
                       this.syncDomwin()
                     }
                   }
@@ -128,7 +129,8 @@
         editForm: false,
         ruleForm: {},
         dnsQuery: {
-          dnsname: this.dnsname
+          dnsname: '',
+          type: ''
         }
       }
     },
@@ -166,14 +168,14 @@
       syncDomwin() {
         this.$Message.info('正在同步中，请稍后')
         this.sync = true
-        if (this.dnsQuery.dnsname === 'godaddy') {
+        if (this.dnsQuery.type === 'godaddy') {
           PostGodaddyDomain(this.dnsQuery).then(() => {
             this.sync = false
           }).catch(error => {
             const errordata = JSON.stringify(error.response.data)
             this.$Message.error(errordata);
           })
-        } else if (this.dnsQuery.dnsname === 'namesilo') {
+        } else if (this.dnsQuery.type === 'namesilo') {
           PostNamesiloDomain(this.dnsQuery).then(() => {
             this.sync = false
           }).catch(error => {
