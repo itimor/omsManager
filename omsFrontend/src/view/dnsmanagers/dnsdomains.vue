@@ -24,7 +24,7 @@
 </template>
 <script>
   import {getDnsDomain} from '@/api/dnsmanager'
-  import * as filters from '@/filters'
+  import { diffDate } from '@/libs/util'
 
   export default {
     data() {
@@ -57,7 +57,7 @@
             key: 'expire_time',
             sortable: true,
             render: function (h, params) {
-              return h('a', filters.diffDate(params.row.expire_time))
+              return h('a', diffDate(params.row.expire_time))
             }
           },
         ],

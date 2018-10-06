@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 // cookie保存的天数
 import config from '@/config'
 import {forEach, hasOneOf, objEqual} from '@/libs/tools'
+import {parseTime} from "@/libs/util";
 
 export const USER_KEY = 'user'
 export const TOKEN_KEY = 'token'
@@ -306,4 +307,72 @@ export const routeHasExist = (tagNavList, routeItem) => {
     if (routeEqual(tagNavList[index], routeItem)) res = true
   })
   return res
+}
+
+/**
+* 时间差
+ */
+export const diffDate = (date) => {
+  const d1 = new Date()
+  const d2 = new Date(date)
+  return Math.round(parseInt(d2 - d1) / 1000 / 60 / 60 / 24)
+}
+
+/**
+ *  时间 格式化
+ */
+export function formatTime(strtime, option) {
+  const d = new Date(strtime)
+  const now = Date.now()
+
+  const diff = (now - d) / 1000
+
+  if (diff < 30) {
+    return '刚刚'
+  } else if (diff < 3600) { // less 1 hour
+    return Math.ceil(diff / 60) + '分钟前'
+  } else if (diff < 3600 * 24) {
+    return Math.ceil(diff / 3600) + '小时前'
+  } else if (diff < 3600 * 24 * 2) {
+    return '1天前'
+  }
+  if (option) {
+    return parseTime(strtime, option)
+  } else {
+    return d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分'
+  }
+}
+
+/**
+ *  数字 格式化
+ */
+export function nFormatter(num, digits) {
+  const si = [
+    { value: 1E18, symbol: 'E' },
+    { value: 1E15, symbol: 'P' },
+    { value: 1E12, symbol: 'T' },
+    { value: 1E9, symbol: 'G' },
+    { value: 1E6, symbol: 'M' },
+    { value: 1E3, symbol: 'k' }
+  ]
+  for (let i = 0; i < si.length; i++) {
+    if (num >= si[i].value) {
+      return (num / si[i].value + 0.1).toFixed(digits).replace(/\.0+$|(\.[0-9]*[1-9])0+$/, '$1') + si[i].symbol
+    }
+  }
+  return num.toString()
+}
+
+/**
+ time ago
+ */
+export function timeAgo(time) {
+  const between = Date.now() / 1000 - Number(time)
+  if (between < 3600) {
+    return pluralize(~~(between / 60), ' minute')
+  } else if (between < 86400) {
+    return pluralize(~~(between / 3600), ' hour')
+  } else {
+    return pluralize(~~(between / 86400), ' day')
+  }
 }
