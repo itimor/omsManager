@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# author: kiven
+# author: timor
 
 import time
 import datetime

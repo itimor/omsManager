@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# author: kiven
+# author: timor
 
 from django.db import models
 from tools.filesize import convert_size

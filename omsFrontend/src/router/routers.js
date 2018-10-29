@@ -45,23 +45,6 @@ export default [
       }
     ]
   },
-  {
-    path: '/dnsmanagers', name: 'dnsmanagers', meta: {icon: 'logo-buffer', title: '域名管理'}, component: Main,
-    children: [
-      {
-        path: 'dnsapis',
-        name: 'dnsapis',
-        meta: {icon: 'md-bonfire', title: '域名api'},
-        component: () => import('@/view/dnsmanagers/dnsapis.vue')
-      },
-      {
-        path: 'dnsdomains',
-        name: 'dnsdomains',
-        meta: {icon: 'md-bonfire', title: '域名列表'},
-        component: () => import('@/view/dnsmanagers/dnsdomains.vue')
-      },
-    ]
-  },
   {path: '/401', name: 'error_401', meta: {hideInMenu: true}, component: () => import('@/view/error-page/401.vue')},
   {path: '/500', name: 'error_500', meta: {hideInMenu: true}, component: () => import('@/view/error-page/500.vue')},
   {path: '*', name: 'error_404', meta: {hideInMenu: true}, component: () => import('@/view/error-page/404.vue')}

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# author: kiven
+# author: timor
 
 import requests
 import json
@@ -32,4 +32,4 @@ def get_time_format(time):
 
 
 if __name__ == '__main__':
-    print(whois('kiven.com'))
+    print(whois('timor.com'))

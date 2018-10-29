@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-# author: kiven
+# author: timor
 
-from omsBackend.settings import SK
-
+try:
+    from omsBackend.settings import SK
+except:
+    SK = 'xxoo'
 
 def skype_bot(user, content):
     chat = SK.chats[user]

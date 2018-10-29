@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# author: kiven
+# author: timor
 
 from users.models import User, Role
 from rest_framework import serializers

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# author: kiven
+# author: timor
 
 from rest_framework import viewsets
 from users.serializers import UserSerializer, RoleSerializer

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# author: kiven
+# author: timor
 
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser

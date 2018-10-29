@@ -14,7 +14,7 @@ export default {
    */
   baseUrl: {
     dev: 'http://127.0.0.1:8000',
-    pro: 'http://oms.e-veb.info'
+    pro: 'http://oms.itgo88.com'
   },
 
   // 表格数据
@@ -27,7 +27,6 @@ export default {
 
   // 登录
   login: '/api/api-token-auth/',
-  // logout: '/api/logout/',
   changePassword: '/api/changepasswd/',
 
   // 用户
@@ -38,13 +37,5 @@ export default {
   // tools
   uploads: '/api/upload/',
   sendmail: '/api/sendmail/',
-  sendmessage: '/api/sendmessage/',
-
-  // dns
-  dnsapis: '/api/dnsapikeys/',
-  dnstypes: '/api/dnstypes/',
-  dnsdomains: '/api/dnsdomains/',
-  dnsrecords: '/api/dnsrecords/',
-  godaddydomains: `/api/godaddydomains/`,
-  namesilodomains: `/api/namesilodomains/`
+  sendmessage: '/api/sendmessage/'
 }

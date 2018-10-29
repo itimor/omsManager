@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# author: kiven
+# author: timor
 
 a = [{'replace': '/idc', 'value': '宇宙帝国', 'details': 'type', 'prev': None}, {'replace': '/status', 'value': 'used', 'prev': 'noused'}]
 

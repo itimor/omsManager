@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# author: kiven
+# author: timor
 
 import requests
 import json
@@ -69,8 +69,8 @@ def diffdns(alldomains, domainstatus_url, record_url):
             # 邮件通知
             sub = '%s 域名异常' % domain
             content = '大胸弟，%s 域名异常, 需要更换ip\n 详细信息：%s' % (domain, result)
-            to_list = 'kiven@tb-gaming.com'
-            cc_list = 'kiven@tb-gaming.com'
+            to_list = 'timor@tb-gaming.com'
+            cc_list = 'timor@tb-gaming.com'
             if send_mail(sub, content, to_list, cc_list):
                 logging.info("%s - [域名异常，通知邮件发送成功]" % domain)
             else:

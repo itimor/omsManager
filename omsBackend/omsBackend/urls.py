@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# author: kiven
+# author: timor
 
 from django.conf.urls import url, include
 from django.conf.urls.static import static
