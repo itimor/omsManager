@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',  # 过滤
     'corsheaders',  # 跨域
-    'dry_rest_permissions',  # 权限
     'tools',
     'users',
     'dnsmanager',
