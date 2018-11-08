@@ -98,8 +98,8 @@ class CDNAPI(object):
     def postFirewallWhiteips(self, id, ips):
         """
         添加/修改白名单ips
-        :param id:
-        :param ips:
+        :param id: 1
+        :param ips: 1.1.1.1|2.2.2.2
         :return:
         """
         method = 'POST'
@@ -113,7 +113,7 @@ class CDNAPI(object):
     def deleteFirewallWhiteips(self, id):
         """
         删除白名单
-        :param id:
+        :param id: 1
         :return:
         """
         method = 'POST'
