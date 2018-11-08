@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # author: timor
+# desc: cdnbest 黑白名单设置
 
 import datetime
 import time
-import urllib
 from hashlib import md5
 
 import requests
@@ -76,14 +76,15 @@ class CDNAPI(object):
         except:
             return req.json()
 
-    def getDomainList(self):
+    def getSiteinfo(self):
         """
         获得域名
         :return:
         """
-        method = 'POST'
-        url = self.api_url + 'domain/list'
-        return self.http_request(method, url)
+        method = 'GET'
+        url = self.api_url + 'site/list'
+        req = self.http_request(method, url)
+        return req
 
     def getFirewall(self):
         """
@@ -140,11 +141,72 @@ class CDNAPI(object):
         }
         return self.http_request(method, url, data)
 
+    def getFirewallBlackips(self):
+        """
+        获取白名单ips
+        :return:
+        """
+        req = self.getFirewall()
+        blackips = []
+        for res in req:
+            if res['name'] == 'blackip':
+                blackips.append(res)
+
+        return blackips
+
+    def postFirewallBlackip(self, ips):
+        """
+        添加/修改白名单ips
+        :param ips: 127.0.0.1|127.0.0.0/24|127.0.0.1-127.0.0.255
+        :return:
+        """
+        method = 'POST'
+        url = self.api_url + 'firewall/blackip'
+        data = {
+            "ip": ips
+        }
+        return self.http_request(method, url, data)
+
+    def putFirewallBlackip(self, id, ips):
+        """
+        添加/修改白名单ips
+        :param id: 1
+        :param ips: 127.0.0.1|127.0.0.0/24|127.0.0.1-127.0.0.255
+        :return:
+        """
+        method = 'PUT'
+        url = self.api_url + 'firewall/blackip'
+        data = {
+            "id": id,
+            "ip": ips
+        }
+        return self.http_request(method, url, data)
+
+    def deleteFirewallBlackip(self, id):
+        """
+        删除白名单ips
+        :param id: 1
+        :return:
+        """
+        method = 'DELETE'
+        url = self.api_url + 'firewall/blackip'
+        data = {
+            "id": id
+        }
+        return self.http_request(method, url, data)
+
 
 if __name__ == '__main__':
     uid = 1001
     vhost = "itgo88001"
     cdn = CDNAPI(uid, vhost)
+    print(cdn.getFirewall())
+    # 白名单
     # print(cdn.postFirewallWhiteips(1, '4.4.4.4|2.2.2.2'))
     # print(cdn.deleteFirewallWhiteips(1))
-    print(cdn.getFirewallWhiteips())
+    # print(cdn.getFirewallWhiteips())
+    # 黑名单
+    # print(cdn.getFirewallBlackips())
+    # print(cdn postFirewallBlackip('4.4.4.4'))
+    # print(cdn.putFirewallBlackip(1, '4.4.4.4|2.2.2.2'))
+    # print(cdn.deleteFirewallBlackip(1))
