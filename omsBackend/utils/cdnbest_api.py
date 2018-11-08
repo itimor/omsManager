@@ -59,18 +59,17 @@ class CDNAPI(object):
         if __data != None:
             data.update(**__data)
 
-        params = urllib.parse.urlencode(data)
         # 传入data参数字典，data为None 则方法为get，有date为post方法
         if method == 'GET':
-            req = requests.get(url, params=params)
+            req = requests.get(url, data=data, headers=self.__header, verify=False)
         elif method == 'POST':
-            req = requests.post(url, data=data, headers=self.__header, verify=False)
+            req = requests.post(url, data=data)
         elif method == 'PUT':
             req = requests.put(url, data=data, headers=self.__header, verify=False)
         elif method == 'DELETE':
             req = requests.delete(url, data=data, headers=self.__header, verify=False)
         else:
-            return {'msg': 'router mathod not match!'}
+            return {'msg': 'router method not match!'}
 
         try:
             return req.json()
@@ -93,7 +92,25 @@ class CDNAPI(object):
         """
         method = 'GET'
         url = self.api_url + 'firewall'
-        return self.http_request(method, url)
+        req = self.http_request(method, url)
+        if req:
+            return req['rows']
+        else:
+            return req
+
+    def getFirewallWhiteips(self):
+        """
+        获取白名单ips
+        :return:
+        """
+        req = self.getFirewall()
+        hasWrite = False
+        for res in req:
+            if res['name'] == 'cc-white-ips':
+                return res
+
+        if not hasWrite:
+            return {'name': 'cc-white-ips', 'id': None, 'value': None}
 
     def postFirewallWhiteips(self, id, ips):
         """
@@ -112,11 +129,11 @@ class CDNAPI(object):
 
     def deleteFirewallWhiteips(self, id):
         """
-        删除白名单
+        删除白名单ips
         :param id: 1
         :return:
         """
-        method = 'POST'
+        method = 'DELETE'
         url = self.api_url + 'firewall/whiteips'
         data = {
             "id": id
@@ -126,6 +143,8 @@ class CDNAPI(object):
 
 if __name__ == '__main__':
     uid = 1001
-    vhost = "w8ikychrt.com"
+    vhost = "itgo88001"
     cdn = CDNAPI(uid, vhost)
-    print(cdn.getDomainList())
+    # print(cdn.postFirewallWhiteips(1, '4.4.4.4|2.2.2.2'))
+    # print(cdn.deleteFirewallWhiteips(1))
+    print(cdn.getFirewallWhiteips())
