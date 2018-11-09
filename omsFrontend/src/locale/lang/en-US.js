@@ -1,9 +1,9 @@
 export default {
   home: 'home',
   join: 'join',
-  dnsmanagers: 'dnsmanagers',
-  dnsapis: 'dnsapis',
-  dnstypes: 'dnstypes',
+  firewall: 'firewall',
+  cdnsites: 'cdnsites',
+  whiteips: 'whiteips',
   dnsdomains: 'dnsdomains',
   system: 'system',
   users: 'users',

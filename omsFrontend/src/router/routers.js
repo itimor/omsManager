@@ -45,6 +45,23 @@ export default [
       }
     ]
   },
+  {
+    path: '/firewall', name: 'firewall', meta: {icon: 'logo-buffer', title: 'CDN防火墙'}, component: Main,
+    children: [
+      {
+        path: 'cdnsites',
+        name: 'cdnsites',
+        meta: {icon: 'md-bonfire', title: 'cdn站点'},
+        component: () => import('@/view/firewall/cdnsites.vue')
+      },
+      {
+        path: 'whiteips',
+        name: 'whiteips',
+        meta: {icon: 'md-bonfire', title: '历史记录'},
+        component: () => import('@/view/firewall/whiteips.vue')
+      }
+    ]
+  },
   {path: '/401', name: 'error_401', meta: {hideInMenu: true}, component: () => import('@/view/error-page/401.vue')},
   {path: '/500', name: 'error_500', meta: {hideInMenu: true}, component: () => import('@/view/error-page/500.vue')},
   {path: '*', name: 'error_404', meta: {hideInMenu: true}, component: () => import('@/view/error-page/404.vue')}

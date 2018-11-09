@@ -14,7 +14,7 @@
   </Form>
 </template>
 <script>
-  import {postRole} from '@/api/user'
+  import { postCdnsite } from '@/api/firewall'
 
   export default {
     data() {
@@ -34,7 +34,7 @@
       submitForm(name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            postRole(this.ruleForm).then(() => {
+            postCdnsite(this.ruleForm).then(() => {
               this.$emit('DialogStatus', false)
             }).catch(error => {
               const errordata = JSON.stringify(error.response.data)

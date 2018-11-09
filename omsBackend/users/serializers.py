@@ -7,11 +7,10 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
     roles = serializers.SlugRelatedField(many=True, queryset=Role.objects.all(), slug_field='name', allow_null=True)
-    skype = serializers.CharField(allow_null=True)
 
     class Meta:
         model = User
-        fields = ('url', 'id', 'username', 'email', 'avator', 'skype', 'roles', 'is_active', 'password')
+        fields = ('url', 'id', 'username', 'uid', 'avator', 'roles', 'is_active', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -28,13 +27,12 @@ class UserSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         roles = validated_data.pop('roles')
         instance.username = validated_data.get('username', instance.username)
-        instance.email = validated_data.get('email', instance.email)
+        instance.uid = validated_data.get('uid', instance.uid)
         instance.avator = validated_data.get('avator', instance.avator)
-        instance.skype = validated_data.get('skype', instance.skype)
         instance.is_active = validated_data.get('is_active', instance.is_active)
         try:
             instance.set_password(validated_data['password'])
-        except Exception as e:
+        except:
             pass
         instance.roles.set(roles)
         instance.save()

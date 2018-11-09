@@ -7,10 +7,10 @@ from users.models import User, Role
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('-id')
+    queryset = User.objects.all()
     serializer_class = UserSerializer
     search_fields = ['username']
-    filter_fields = ['username', 'roles__name']
+    filter_fields = ['username', 'uid']
 
 
 class RoleViewSet(viewsets.ModelViewSet):

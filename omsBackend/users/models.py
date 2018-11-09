@@ -32,17 +32,15 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     username = models.CharField(max_length=32, unique=True, db_index=True)
-    email = models.EmailField(max_length=255, null=True, blank=True)
-    avator = models.CharField(max_length=255, default='http://ask.rednet.cn/uploads/answer/20160602/5a6b156af6661779840dd6b28e7e1898.jpg')
-    skype = models.CharField(max_length=255, null=True, blank=True)
+    uid = models.SmallIntegerField(blank=True, null=True, verbose_name=u'uid')
+    avator = models.CharField(max_length=255,
+                              default='http://ask.rednet.cn/uploads/answer/20160602/5a6b156af6661779840dd6b28e7e1898.jpg')
     roles = models.ManyToManyField('Role', blank=True, verbose_name=u'角色')
     create_date = models.DateField(auto_now=True, verbose_name=u'创建时间')
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'  # 必须有一个唯一标识--USERNAME_FIELD
-
-    # REQUIRED_FIELDS = ['email']  # 创建superuser时的必须字段
 
     def __str__(self):  # __unicode__ on Python 2
         return self.username

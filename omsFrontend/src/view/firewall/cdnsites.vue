@@ -22,16 +22,21 @@
     <Modal v-model="editForm" title="修改" footer-hide>
       <edit-group :ruleForm="ruleForm" @DialogStatus="getDialogStatus"></edit-group>
     </Modal>
+
+    <Modal v-model="addWriteForm" :title="`${vhost}-白名单设置`" footer-hide>
+      <add-whiteip :ruleForm="ruleForm" @DialogStatus="getDialogStatus"></add-whiteip>
+    </Modal>
   </div>
 </template>
 <script>
-  import {getUser, deleteUser} from '@/api/user'
-  import addGroup from './components/adduser.vue'
-  import editGroup from './components/edituser.vue'
+  import {getCdnsite, deleteCdnsite, getActionWhiteip} from '@/api/firewall'
+  import addGroup from './components/addsite.vue'
+  import editGroup from './components/editsite.vue'
+  import addWhiteip from './components/addwhiteip.vue'
 
   export default {
     components: {
-      addGroup, editGroup
+      addGroup, editGroup, addWhiteip
     },
     data() {
       return {
@@ -40,46 +45,11 @@
         tablecolumns: [
           {
             title: '名称',
-            key: 'username'
+            key: 'name'
           },
           {
-            title: 'uid',
-            key: 'uid'
-          },
-          {
-            title: '头像',
-            key: 'avator',
-            render: (h, params) => {
-              return h('Poptip', {
-                props: {
-                  transfer: true,
-                  trigger: 'hover',
-                },
-              }, [
-                h('img', {
-                  attrs: {
-                    src: params.row.avator
-                  },
-                  style: {
-                    width: '200px'
-                  },
-                  slot: 'content'
-                }),
-                h('Avatar', {
-                  props: {
-                    src: params.row.avator,
-                  }
-                })
-              ])
-            }
-          },
-          {
-            title: '角色',
-            key: 'roles'
-          },
-          {
-            title: '激活',
-            key: 'is_active'
+            title: '备注',
+            key: 'desc'
           },
           {
             title: '操作',
@@ -87,6 +57,22 @@
             align: 'center',
             render: (h, params) => {
               return h('div', [
+                h('Button', {
+                  props: {
+                    type: 'warning',
+                    size: 'small'
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: () => {
+                      this.addWriteForm = true
+                      this.vhost = params.row.name
+                      this.fetchWhiteipData()
+                    }
+                  }
+                }, '白名单'),
                 h('Button', {
                   props: {
                     type: 'success',
@@ -111,7 +97,7 @@
                   },
                   on: {
                     'on-ok': () => {
-                      deleteUser(params.row.id).then(res => {
+                      deleteCdnsite(params.row.id).then(res => {
                         this.fetchData()
                       })
                     },
@@ -138,7 +124,9 @@
         },
         addForm: false,
         editForm: false,
-        ruleForm: {}
+        addWriteForm: false,
+        ruleForm: {},
+        vhost: ''
       }
     },
     created() {
@@ -146,14 +134,29 @@
     },
     methods: {
       fetchData() {
-        getUser(this.listQuery).then(res => {
+        getCdnsite(this.listQuery).then(res => {
           this.tableData = res.data.results
           this.tableCount = res.data.count
+        })
+      },
+      fetchWhiteipData() {
+        const params = {
+          vhost: this.vhost
+        }
+        getActionWhiteip(params).then(res => {
+          this.ruleForm = res.data[0]
+          this.ruleForm['vhost'] = this.vhost
+          this.ruleForm['action'] = res.data.length
+        }).catch(error => {
+          console.log(error)
+          const errordata = JSON.stringify(error.response.data)
+          this.$Message.error(errordata);
         })
       },
       getDialogStatus(data) {
         this.addForm = data
         this.editForm = data
+        this.addWriteForm = data
         this.fetchData()
       },
       changePage(page) {

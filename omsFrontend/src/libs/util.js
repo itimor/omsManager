@@ -1,14 +1,13 @@
 import Cookies from 'js-cookie'
 // cookie保存的天数
 import config from '@/config'
-import {forEach, hasOneOf, objEqual} from '@/libs/tools'
-import {parseTime} from "@/libs/util";
+import { forEach, hasOneOf, objEqual } from '@/libs/tools'
 
 export const USER_KEY = 'user'
 export const TOKEN_KEY = 'token'
 
 export const setUsername = (user) => {
-  Cookies.set(USER_KEY, user, {expires: config.cookieExpires || 1})
+  Cookies.set(USER_KEY, user, { expires: config.cookieExpires || 1 })
 }
 
 export const getUsername = () => {
@@ -18,7 +17,7 @@ export const getUsername = () => {
 }
 
 export const setToken = (token) => {
-  Cookies.set(TOKEN_KEY, token, {expires: config.cookieExpires || 1})
+  Cookies.set(TOKEN_KEY, token, { expires: config.cookieExpires || 1 })
 }
 
 export const getToken = () => {
@@ -78,7 +77,7 @@ export const getBreadCrumbList = (routeMetched, homeRoute) => {
   res = res.filter(item => {
     return !item.meta.hideInMenu
   })
-  return [Object.assign(homeRoute, {to: homeRoute.path}), ...res]
+  return [Object.assign(homeRoute, { to: homeRoute.path }), ...res]
 }
 
 export const showTitle = (item, vm) => vm.$config.useI18n ? vm.$t(item.name) : ((item.meta && item.meta.title) || item.name)
@@ -123,10 +122,10 @@ export const getHomeRoute = routers => {
  * @description 如果该newRoute已经存在则不再添加
  */
 export const getNewTagList = (list, newRoute) => {
-  const {name, path, meta} = newRoute
+  const { name, path, meta } = newRoute
   let newList = [...list]
   if (newList.findIndex(item => item.name === name) >= 0) return newList
-  else newList.push({name, path, meta})
+  else newList.push({ name, path, meta })
   return newList
 }
 
@@ -310,7 +309,7 @@ export const routeHasExist = (tagNavList, routeItem) => {
 }
 
 /**
-* 时间差
+ * 时间差
  */
 export const diffDate = (date) => {
   const d1 = new Date()
@@ -318,10 +317,42 @@ export const diffDate = (date) => {
   return Math.round(parseInt(d2 - d1) / 1000 / 60 / 60 / 24)
 }
 
+export const parseTime = (time, cFormat) => {
+  if (arguments.length === 0) {
+    return null
+  }
+  const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
+  let date
+  if (typeof time === 'object') {
+    date = time
+  } else {
+    if (('' + time).length === 10) time = parseInt(time) * 1000
+    date = new Date(time)
+  }
+  const formatObj = {
+    y: date.getFullYear(),
+    m: date.getMonth() + 1,
+    d: date.getDate(),
+    h: date.getHours(),
+    i: date.getMinutes(),
+    s: date.getSeconds(),
+    a: date.getDay()
+  }
+  const timeSstr = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
+    let value = formatObj[key]
+    if (key === 'a') return ['一', '二', '三', '四', '五', '六', '日'][value - 1]
+    if (result.length > 0 && value < 10) {
+      value = '0' + value
+    }
+    return value || 0
+  })
+  return timeSstr
+}
+
 /**
  *  时间 格式化
  */
-export function formatTime(strtime, option) {
+export const formatTime = (strtime, option) => {
   const d = new Date(strtime)
   const now = Date.now()
 
@@ -346,7 +377,7 @@ export function formatTime(strtime, option) {
 /**
  *  数字 格式化
  */
-export function nFormatter(num, digits) {
+export const nFormatter = (num, digits) => {
   const si = [
     { value: 1E18, symbol: 'E' },
     { value: 1E15, symbol: 'P' },
@@ -366,7 +397,7 @@ export function nFormatter(num, digits) {
 /**
  time ago
  */
-export function timeAgo(time) {
+export const timeAgo = (time) => {
   const between = Date.now() / 1000 - Number(time)
   if (between < 3600) {
     return pluralize(~~(between / 60), ' minute')

@@ -5,7 +5,7 @@
       </Input>
     </FormItem>
     <FormItem label="备注" prop="desc">
-      <Input type="text" v-model="ruleForm.desc" placeholder="input">
+      <Input type="textarea" :rows="4" v-model="ruleForm.desc" placeholder="input">
       </Input>
     </FormItem>
     <FormItem>

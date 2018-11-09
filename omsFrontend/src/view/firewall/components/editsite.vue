@@ -14,15 +14,16 @@
   </Form>
 </template>
 <script>
-  import {postRole} from '@/api/user'
+  import { putCdnsite } from '@/api/firewall'
 
   export default {
+    props: {
+      ruleForm: {
+        type: Object,
+      }
+    },
     data() {
       return {
-        ruleForm: {
-          name: '',
-          desc: ''
-        },
         rules: {
           name: [
             {required: true, message: 'The input cannot be empty', trigger: 'blur'},
@@ -34,7 +35,7 @@
       submitForm(name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            postRole(this.ruleForm).then(() => {
+            putCdnsite(this.ruleForm.id, this.ruleForm).then(() => {
               this.$emit('DialogStatus', false)
             }).catch(error => {
               const errordata = JSON.stringify(error.response.data)

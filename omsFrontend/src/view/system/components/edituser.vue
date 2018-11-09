@@ -4,16 +4,12 @@
       <Input type="text" v-model="ruleForm.username" placeholder="input">
       </Input>
     </FormItem>
-    <FormItem label="邮箱" prop="email">
-      <Input type="text" v-model="ruleForm.email" placeholder="input">
+    <FormItem label="uid" prop="uid">
+      <Input type="text" v-model="ruleForm.uid" placeholder="input">
       </Input>
     </FormItem>
     <FormItem label="头像" prop="avator">
       <Input type="text" v-model="ruleForm.avator" placeholder="input">
-      </Input>
-    </FormItem>
-    <FormItem label="skype" prop="skype">
-      <Input type="text" v-model="ruleForm.skype" placeholder="input">
       </Input>
     </FormItem>
     <FormItem label="角色" prop="roles">
@@ -48,7 +44,7 @@
           username: [
             {required: true, message: 'The input cannot be empty', trigger: 'blur'},
           ],
-          email: [
+          uid: [
             {required: true, message: 'The input cannot be empty', trigger: 'blur'},
           ],
           password: [

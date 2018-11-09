@@ -37,5 +37,10 @@ export default {
   // tools
   uploads: '/api/upload/',
   sendmail: '/api/sendmail/',
-  sendmessage: '/api/sendmessage/'
+  sendmessage: '/api/sendmessage/',
+
+  // firewall
+  cdnsites: '/api/cdnsites/',
+  whiteips: '/api/whiteips/',
+  actionwhiteip: '/api/actionwhiteip/'
 }

@@ -9,7 +9,7 @@ from hashlib import md5
 import requests
 
 
-class CDNAPI(object):
+class CDNBEST(object):
     def __init__(self, uid, vhost):
         self.api_url = 'http://itgocdn.com/api2/site/index.php/'
         self.skey = "Wactat3CtTJxwwGT"
@@ -49,6 +49,9 @@ class CDNAPI(object):
         接收请求，返回结果
         """
         self.__header["Accept"] = "application/json"
+        token_e_time = datetime.datetime.now()
+        print("token_e_time: %s" % token_e_time)
+        print("token_s_time: %s" % self.token_s_time)
 
         data = {
             'uid': self.uid,
@@ -108,10 +111,10 @@ class CDNAPI(object):
         hasWrite = False
         for res in req:
             if res['name'] == 'cc-white-ips':
-                return res
+                return [res]
 
         if not hasWrite:
-            return {'name': 'cc-white-ips', 'id': None, 'value': None}
+            return []
 
     def postFirewallWhiteips(self, id, ips):
         """
@@ -199,10 +202,10 @@ class CDNAPI(object):
 if __name__ == '__main__':
     uid = 1001
     vhost = "itgo88001"
-    cdn = CDNAPI(uid, vhost)
-    print(cdn.getFirewall())
+    cdn = CDNBEST(uid, vhost)
+    # print(cdn.getFirewall())
     # 白名单
-    # print(cdn.postFirewallWhiteips(1, '4.4.4.4|2.2.2.2'))
+    # print(cdn.postFirewallWhiteips(1, ''))
     # print(cdn.deleteFirewallWhiteips(1))
     # print(cdn.getFirewallWhiteips())
     # 黑名单

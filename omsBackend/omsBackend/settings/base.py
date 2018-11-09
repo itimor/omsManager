@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',  # 跨域
     'tools',
     'users',
-    'dnsmanager',
+    'firewall',
 ]
 
 MIDDLEWARE = [
