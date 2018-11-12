@@ -9,13 +9,6 @@ export const login = (data) => {
   })
 }
 
-export const logout = () => {
-  return axios.request({
-    url: apiURL.logout,
-    method: 'get'
-  })
-}
-
 export const changePassword = (data) => {
   return axios.request({
     url: apiURL.changePassword,

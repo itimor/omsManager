@@ -2,7 +2,7 @@
   <div class="components-container">
     <div class="head-lavel">
       <div class="table-button">
-        <Button type="primary" icon="md-add" @click="addForm=true">新建</Button>
+        <Button v-if="username==='admin'" type="primary" icon="md-add" @click="addForm=true">新建</Button>
       </div>
       <div class="table-search">
       </div>
@@ -28,6 +28,7 @@
   import {getRole, deleteRole} from '@/api/user'
   import addGroup from './components/addrole.vue'
   import editGroup from './components/editrole.vue'
+  import {mapGetters} from 'vuex'
 
   export default {
     components: {
@@ -37,16 +38,33 @@
       return {
         tableData: [],
         tableCount: 10,
-        tablecolumns: [
-          {
-            title: '名称',
-            key: 'name'
-          },
-          {
-            title: '备注',
-            key: 'desc'
-          },
-          {
+        listQuery: {
+          limit: 10,
+          offset: 0,
+          search: ''
+        },
+        addForm: false,
+        editForm: false,
+        ruleForm: {}
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'role',
+        'username'
+      ]),
+      tablecolumns() {
+        let columns = [];
+        columns.push({
+          title: '名称',
+          key: 'name'
+        });
+        columns.push({
+          title: '备注',
+          key: 'desc'
+        });
+        if (this.username === 'admin') {
+          columns.push({
             title: '操作',
             key: 'action',
             align: 'center',
@@ -55,7 +73,7 @@
                 h('Button', {
                   props: {
                     type: 'success',
-                    size: 'small'
+                    size: 'small',
                   },
                   style: {
                     marginRight: '5px'
@@ -94,16 +112,9 @@
                 ]),
               ]);
             }
-          }
-        ],
-        listQuery: {
-          limit: 10,
-          offset: 0,
-          search: ''
-        },
-        addForm: false,
-        editForm: false,
-        ruleForm: {}
+          })
+        }
+        return columns;
       }
     },
     created() {

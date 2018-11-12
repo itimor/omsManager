@@ -2,7 +2,7 @@
   <div class="components-container">
     <div class="head-lavel">
       <div class="table-button">
-        <Button type="primary" icon="md-add" @click="addForm=true">新建</Button>
+        <Button v-if="username==='admin'" type="primary" icon="md-add" @click="addForm=true">新建</Button>
       </div>
       <div class="table-search">
       </div>
@@ -33,6 +33,7 @@
   import addGroup from './components/addsite.vue'
   import editGroup from './components/editsite.vue'
   import addWhiteip from './components/addwhiteip.vue'
+  import {mapGetters} from 'vuex'
 
   export default {
     components: {
@@ -42,81 +43,6 @@
       return {
         tableData: [],
         tableCount: 10,
-        tablecolumns: [
-          {
-            title: '名称',
-            key: 'name'
-          },
-          {
-            title: '备注',
-            key: 'desc'
-          },
-          {
-            title: '操作',
-            key: 'action',
-            align: 'center',
-            render: (h, params) => {
-              return h('div', [
-                h('Button', {
-                  props: {
-                    type: 'warning',
-                    size: 'small'
-                  },
-                  style: {
-                    marginRight: '5px'
-                  },
-                  on: {
-                    click: () => {
-                      this.addWriteForm = true
-                      this.vhost = params.row.name
-                      this.fetchWhiteipData()
-                    }
-                  }
-                }, '白名单'),
-                h('Button', {
-                  props: {
-                    type: 'success',
-                    size: 'small'
-                  },
-                  style: {
-                    marginRight: '5px'
-                  },
-                  on: {
-                    click: () => {
-                      this.editForm = true
-                      this.ruleForm = params.row
-                    }
-                  }
-                }, '修改'),
-                h('Poptip', {
-                  props: {
-                    title: '确定要删除吗！',
-                    confirm: true,
-                    transfer: true,
-                    placement: 'top-end'
-                  },
-                  on: {
-                    'on-ok': () => {
-                      deleteCdnsite(params.row.id).then(res => {
-                        this.fetchData()
-                      })
-                    },
-                    'on-cancel': () => {
-                      this.$Message.info('取消删除')
-                    }
-                  }
-                }, [
-                  h('Button', {
-                    props: {
-                      type: 'error',
-                      size: 'small',
-                    }
-                  }, '删除')
-                ]),
-              ]);
-            }
-          }
-        ],
         listQuery: {
           limit: 10,
           offset: 0,
@@ -127,6 +53,91 @@
         addWriteForm: false,
         ruleForm: {},
         vhost: ''
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'role',
+        'username'
+      ]),
+      tablecolumns() {
+        let columns = [];
+        columns.push({
+          title: '名称',
+          key: 'name'
+        });
+        columns.push({
+          title: '备注',
+          key: 'desc'
+        });
+        columns.push({
+          title: '操作',
+          key: 'action',
+          align: 'center',
+          render: (h, params) => {
+            return h('div', [
+              h('Button', {
+                props: {
+                  type: 'warning',
+                  size: 'small',
+                },
+                style: {
+                  marginRight: '5px'
+                },
+                on: {
+                  click: () => {
+                    this.addWriteForm = true
+                    this.vhost = params.row.name
+                    this.fetchWhiteipData()
+                  }
+                }
+              }, '白名单'),
+              h('Button', {
+                props: {
+                  type: 'success',
+                  size: 'small',
+                  disabled: this.username === 'admin' ? false : true
+                },
+                style: {
+                  marginRight: '5px'
+                },
+                on: {
+                  click: () => {
+                    this.editForm = true
+                    this.ruleForm = params.row
+                  }
+                }
+              }, '修改'),
+              h('Poptip', {
+                props: {
+                  title: '确定要删除吗！',
+                  confirm: true,
+                  transfer: true,
+                  placement: 'top-end'
+                },
+                on: {
+                  'on-ok': () => {
+                    deleteCdnsite(params.row.id).then(res => {
+                      this.fetchData()
+                    })
+                  },
+                  'on-cancel': () => {
+                    this.$Message.info('取消删除')
+                  }
+                }
+              }, [
+                h('Button', {
+                  props: {
+                    type: 'error',
+                    size: 'small',
+                    disabled: this.username === 'admin' ? false : true
+                  }
+                }, '删除')
+              ]),
+            ]);
+          }
+        });
+        return columns;
       }
     },
     created() {

@@ -2,7 +2,7 @@
   <div class="components-container">
     <div class="head-lavel">
       <div class="table-button">
-        <Button type="primary" icon="md-add" @click="addForm=true">新建</Button>
+        <Button v-if="username==='admin'" type="primary" icon="md-add" @click="addForm=true">新建</Button>
       </div>
       <div class="table-search">
       </div>
@@ -28,6 +28,7 @@
   import {getUser, deleteUser} from '@/api/user'
   import addGroup from './components/adduser.vue'
   import editGroup from './components/edituser.vue'
+  import {mapGetters} from 'vuex'
 
   export default {
     components: {
@@ -37,51 +38,68 @@
       return {
         tableData: [],
         tableCount: 10,
-        tablecolumns: [
-          {
-            title: '名称',
-            key: 'username'
-          },
-          {
-            title: 'uid',
-            key: 'uid'
-          },
-          {
-            title: '头像',
-            key: 'avator',
-            render: (h, params) => {
-              return h('Poptip', {
-                props: {
-                  transfer: true,
-                  trigger: 'hover',
+        listQuery: {
+          limit: 10,
+          offset: 0,
+          search: ''
+        },
+        addForm: false,
+        editForm: false,
+        ruleForm: {}
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'role',
+        'username'
+      ]),
+      tablecolumns() {
+        let columns = [];
+        columns.push({
+          title: '名称',
+          key: 'username'
+        });
+        columns.push({
+          title: 'uid',
+          key: 'uid'
+        });
+        columns.push({
+          title: '头像',
+          key: 'avator',
+          render: (h, params) => {
+            return h('Poptip', {
+              props: {
+                transfer: true,
+                trigger: 'hover',
+              },
+            }, [
+              h('img', {
+                attrs: {
+                  src: params.row.avator
                 },
-              }, [
-                h('img', {
-                  attrs: {
-                    src: params.row.avator
-                  },
-                  style: {
-                    width: '200px'
-                  },
-                  slot: 'content'
-                }),
-                h('Avatar', {
-                  props: {
-                    src: params.row.avator,
-                  }
-                })
-              ])
-            }
-          },
-          {
-            title: '角色',
-            key: 'roles'
-          },
-          {
-            title: '激活',
-            key: 'is_active'
-          },
-          {
+                style: {
+                  width: '200px'
+                },
+                slot: 'content'
+              }),
+              h('Avatar', {
+                props: {
+                  src: params.row.avator,
+                }
+              })
+            ])
+          }
+        });
+        columns.push({
+          title: '角色',
+          key: 'roles'
+        });
+        columns.push({
+          title: '激活',
+          key: 'is_active'
+        });
+        if (this.username === 'admin') {
+          columns.push({
             title: '操作',
             key: 'action',
             align: 'center',
@@ -129,16 +147,9 @@
                 ]),
               ]);
             }
-          }
-        ],
-        listQuery: {
-          limit: 10,
-          offset: 0,
-          search: ''
-        },
-        addForm: false,
-        editForm: false,
-        ruleForm: {}
+          })
+        }
+        return columns;
       }
     },
     created() {

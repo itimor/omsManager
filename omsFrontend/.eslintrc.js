@@ -15,6 +15,7 @@ module.exports = {
     '[vue]': {
       'edit.insertSpaces': true,
       'editor.tabSize': 2
-    }
+    },
+    "space-before-function-paren": ["error", "never"],
   }
 }

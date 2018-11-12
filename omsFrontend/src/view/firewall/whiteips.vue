@@ -43,6 +43,10 @@
             key: 'action'
           },
           {
+            title: '操作用户',
+            key: 'create_user'
+          },
+          {
             title: '操作时间',
             key: 'create_time'
           }
