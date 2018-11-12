@@ -1,7 +1,7 @@
 <template>
   <Form ref="ruleForm" :model="ruleForm" :label-width="80">
     <FormItem label="值" prop="value">
-      <Input type="textarea" :rows="4" v-model="ruleForm.value" placeholder="多个ip用着`|`分割，如 `127.0.0.1|128.0.0.1`">
+      <Input type="textarea" :rows="10" v-model="ruleForm.value" placeholder="多个ip用着`|`分割，如 `127.0.0.1|128.0.0.1`">
       </Input>
       <a class="tips">Tip：多个ip用着`|`分割，如 `127.0.0.1|128.0.0.1`</a>
     </FormItem>
