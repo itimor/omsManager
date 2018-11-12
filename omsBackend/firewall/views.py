@@ -43,9 +43,9 @@ class ActionWhiteIpViewSet(viewsets.ViewSet):
         action = request.data['action']
         if action == '2':
             query = cdnapi.deleteFirewallWhiteips(1)
-            WhiteIp.objects.create(vhost=vhost, value='', action=action)
+            WhiteIp.objects.create(vhost=vhost, value='', action=action, create_user=request.user)
         else:
             value = request.data['value']
             query = cdnapi.postFirewallWhiteips(1, value)
-            WhiteIp.objects.create(vhost=vhost, value=value, action=action)
+            WhiteIp.objects.create(vhost=vhost, value=value, action=action, create_user=request.user)
         return Response(query)
