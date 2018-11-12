@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('url', 'id', 'username', 'uid', 'avator', 'roles', 'is_active', 'password')
+        fields = ('url', 'id', 'username', 'avator', 'roles', 'is_active', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -27,7 +27,6 @@ class UserSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         roles = validated_data.pop('roles')
         instance.username = validated_data.get('username', instance.username)
-        instance.uid = validated_data.get('uid', instance.uid)
         instance.avator = validated_data.get('avator', instance.avator)
         instance.is_active = validated_data.get('is_active', instance.is_active)
         try:

@@ -10,7 +10,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     search_fields = ['username']
-    filter_fields = ['username', 'uid']
+    filter_fields = ['username']
 
 
 class RoleViewSet(viewsets.ModelViewSet):

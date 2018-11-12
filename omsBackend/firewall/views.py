@@ -31,16 +31,14 @@ class ActionWhiteIpViewSet(viewsets.ViewSet):
     serializer_class = ActionWhiteIpSerializer
 
     def list(self, request):
-        uid = User.objects.get(username=request.user).uid
         vhost = request.GET['vhost']
-        cdnapi = CDNBEST(uid, vhost)
+        cdnapi = CDNBEST(vhost)
         query = cdnapi.getFirewallWhiteips()
         return Response(query)
 
     def post(self, request):
-        uid = User.objects.get(username=request.user).uid
         vhost = request.data['vhost']
-        cdnapi = CDNBEST(uid, vhost)
+        cdnapi = CDNBEST(vhost)
 
         action = request.data['action']
         if action == '2':

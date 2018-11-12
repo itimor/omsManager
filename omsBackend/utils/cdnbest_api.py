@@ -10,10 +10,10 @@ import requests
 
 
 class CDNBEST(object):
-    def __init__(self, uid, vhost):
+    def __init__(self, vhost):
         self.api_url = 'http://itgocdn.com/api2/site/index.php/'
         self.skey = "Wactat3CtTJxwwGT"
-        self.uid = uid
+        self.uid = 1001
         self.vhost = vhost
         self.__header = dict()
         self.__token = self.get_token()
@@ -200,10 +200,9 @@ class CDNBEST(object):
 
 
 if __name__ == '__main__':
-    uid = 1001
     vhost = "itgo88001"
-    cdn = CDNBEST(uid, vhost)
-    # print(cdn.getFirewall())
+    cdn = CDNBEST(vhost)
+    print(cdn.getFirewall())
     # 白名单
     # print(cdn.postFirewallWhiteips(1, ''))
     # print(cdn.deleteFirewallWhiteips(1))
