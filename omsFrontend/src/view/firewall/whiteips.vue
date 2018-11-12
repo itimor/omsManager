@@ -21,7 +21,8 @@
     </div>
 
     <Modal v-model="showWriteForm" :title="`白名单ips`" footer-hide width="800">
-      <p>{{value}}</p>
+        <Input type="textarea" :autosize="true" v-model="value" disabled>
+      </Input>
     </Modal>
   </div>
 </template>

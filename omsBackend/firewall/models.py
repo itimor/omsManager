@@ -30,6 +30,9 @@ class WhiteIp(models.Model):
     def __str__(self):
         return 'white_' + self.action
 
+    class Meta:
+        ordering = ['-create_time']
+
 # class BlackIp(models.Model):
 #     site = models.ForeignKey(CdnSite, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'站点')
 #     bid = models.SmallIntegerField(blank=True, null=True, verbose_name='值的id')
