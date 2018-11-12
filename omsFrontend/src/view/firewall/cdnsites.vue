@@ -23,7 +23,7 @@
       <edit-group :ruleForm="ruleForm" @DialogStatus="getDialogStatus"></edit-group>
     </Modal>
 
-    <Modal v-model="addWriteForm" :title="`${vhost}-白名单设置`" footer-hide width="1000">
+    <Modal v-model="addWriteForm" :title="`${vhost}-白名单设置`" footer-hide width="800">
       <add-whiteip :ruleForm="ruleForm" @DialogStatus="getDialogStatus"></add-whiteip>
     </Modal>
   </div>

@@ -60,10 +60,6 @@
           key: 'username'
         });
         columns.push({
-          title: 'uid',
-          key: 'uid'
-        });
-        columns.push({
           title: '头像',
           key: 'avator',
           render: (h, params) => {

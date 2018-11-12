@@ -19,6 +19,10 @@
               @on-change="changePage" @on-page-size-change="changePagesize"></Page>
       </div>
     </div>
+
+    <Modal v-model="showWriteForm" :title="`白名单ips`" footer-hide width="800">
+      <p>{{value}}</p>
+    </Modal>
   </div>
 </template>
 <script>
@@ -36,7 +40,26 @@
           },
           {
             title: '修改值',
-            key: 'value'
+            key: 'value',
+            render: (h, params) => {
+              return h('div', [
+                h('Button', {
+                  props: {
+                    type: 'success',
+                    size: 'small',
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: () => {
+                      this.showWriteForm = true
+                      this.value = params.row.value
+                    }
+                  }
+                }, '查看')
+              ])
+            }
           },
           {
             title: '操作',
@@ -56,9 +79,8 @@
           offset: 0,
           search: ''
         },
-        addForm: false,
-        editForm: false,
-        ruleForm: {}
+        showWriteForm: false,
+        value: {}
       }
     },
     created() {
@@ -70,11 +92,6 @@
           this.tableData = res.data.results
           this.tableCount = res.data.count
         })
-      },
-      getDialogStatus(data) {
-        this.addForm = data
-        this.editForm = data
-        this.fetchData()
       },
       changePage(page) {
         this.listQuery.offset = (page - 1) * this.listQuery.limit

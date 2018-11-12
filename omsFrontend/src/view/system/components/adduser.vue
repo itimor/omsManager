@@ -4,10 +4,6 @@
       <Input type="text" v-model="ruleForm.username" placeholder="input">
       </Input>
     </FormItem>
-    <FormItem label="uid" prop="uid">
-      <Input type="text" v-model="ruleForm.uid" placeholder="input">
-      </Input>
-    </FormItem>
     <FormItem label="头像" prop="avator">
       <Input type="text" v-model="ruleForm.avator" placeholder="input">
       </Input>

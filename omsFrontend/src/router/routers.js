@@ -24,7 +24,7 @@ export default [
         path: '/home',
         name: 'home',
         meta: {hideInMenu: true, title: '首页', notCache: true},
-        component: () => import('@/view/home')
+        component: () => import('@/view/firewall/cdnsites.vue')
       }
     ]
   },
