@@ -18,7 +18,7 @@ class CdnSiteViewSet(viewsets.ModelViewSet):
 class WhiteIpViewSet(viewsets.ModelViewSet):
     queryset = WhiteIp.objects.all()
     serializer_class = WhiteIpSerializer
-    search_fields = ['vhost']
+    search_fields = ['vhost', 'create_time']
 
 
 # class BlackIpViewSet(viewsets.ModelViewSet):
