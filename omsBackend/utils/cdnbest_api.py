@@ -2,8 +2,7 @@
 # author: timor
 # desc: cdnbest 黑白名单设置
 
-import datetime
-import time
+from datetime import datetime, timedelta
 from hashlib import md5
 
 import requests
@@ -22,7 +21,9 @@ class CDNBEST(object):
         """
         登录获取token
         """
-        t = str(int(time.time()))
+        ## 服务器时间总是会少10min中，所以这里也减10min
+        now = (datetime.now() - timedelta(minutes=10)).timestamp()
+        t = str(int(now))
         m1 = md5()
         m2 = md5()
         m1.update((str(self.uid) + self.skey).encode(encoding='utf-8'))
@@ -39,7 +40,7 @@ class CDNBEST(object):
         req = requests.post(url, data=data, headers=self.__header, verify=False)
         try:
             token = req.json()
-            self.token_s_time = datetime.datetime.now()
+            self.token_s_time = datetime.now()
             return token['token']
         except KeyError:
             raise KeyError
@@ -49,7 +50,7 @@ class CDNBEST(object):
         接收请求，返回结果
         """
         self.__header["Accept"] = "application/json"
-        token_e_time = datetime.datetime.now()
+        token_e_time = datetime.now()
         print("token_e_time: %s" % token_e_time)
         print("token_s_time: %s" % self.token_s_time)
 
