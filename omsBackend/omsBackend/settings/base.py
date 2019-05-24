@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'tools',
     'users',
     'firewall',
+    'dnsmanager',
 ]
 
 MIDDLEWARE = [

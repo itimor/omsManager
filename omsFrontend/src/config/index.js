@@ -42,5 +42,13 @@ export default {
   // firewall
   cdnsites: '/api/cdnsites/',
   whiteips: '/api/whiteips/',
-  actionwhiteip: '/api/actionwhiteip/'
+  actionwhiteip: '/api/actionwhiteip/',
+
+  // dns
+  dnsapis: '/api/dnsapikeys/',
+  dnstypes: '/api/dnstypes/',
+  dnsdomains: '/api/dnsdomains/',
+  dnsrecords: '/api/dnsrecords/',
+  godaddydomains: `/api/godaddydomains/`,
+  namesilodomains: `/api/namesilodomains/`
 }
