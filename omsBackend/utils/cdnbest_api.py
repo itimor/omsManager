@@ -39,6 +39,7 @@ class CDNBEST(object):
         url = self.api_url + 'token'
         self.__header["Accept"] = "application/x-www-form-urlencoded"
         req = requests.post(url, data=data, headers=self.__header, verify=False)
+        print(req.json())
         try:
             token = req.json()
             self.token_s_time = datetime.now()

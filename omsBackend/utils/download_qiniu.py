@@ -12,8 +12,8 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 qiniu_key = {
-    "ACCESS_KEY": "Bd1KeZHbjcpdhQxVF9OPpQukrvcoZ1w9QYbTbKKb",
-    "SECRET_KEY": "fadmf-jv6Z4gGguvjpWo9VwAj3xET4eE_OTBhwt-"
+    "ACCESS_KEY": "Bd1Ke4234324coZ1w9QYbTbKKb",
+    "SECRET_KEY": "fadmf-jv6Z4gGgu423432423ET4eE_OTBhwt-"
 }
 
 bucket_name = "game"
