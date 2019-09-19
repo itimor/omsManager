@@ -4,7 +4,6 @@
 import sys
 import requests
 
-
 class NamecomApi:
     def __init__(self, key, secret):
         self.url = 'https://api.dev.name.com/v4'
@@ -13,8 +12,9 @@ class NamecomApi:
 
     def get_domains(self):
         uri = '/domains'
-        result = requests.get(self.url + uri, auth=(self.key, self.secret))
-        return result
+        req = requests.get(self.url + uri, auth=(self.key, self.secret), verify=True)
+        print(req.json())
+        return req
 
     def get_domain_info(self, domainName):
         result = self.api.get_domain(domainName)

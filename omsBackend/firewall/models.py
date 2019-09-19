@@ -33,12 +33,3 @@ class WhiteIp(models.Model):
     class Meta:
         ordering = ['-create_time']
 
-# class BlackIp(models.Model):
-#     site = models.ForeignKey(CdnSite, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'站点')
-#     bid = models.SmallIntegerField(blank=True, null=True, verbose_name='值的id')
-#     value = models.TextField(null=True, blank=True, verbose_name=u'值')
-#     action = models.CharField(choices=Actions.items(), default=0, max_length=1, verbose_name=u'操作')
-#     create_time = models.DateTimeField(auto_now_add=True, verbose_name=u'创建时间')
-#
-#     def __str__(self):
-#         return 'black_' + self.action

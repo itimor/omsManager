@@ -6,7 +6,6 @@ from rest_framework.response import Response
 from firewall.models import CdnSite, WhiteIp
 from firewall.serializers import CdnSiteSerializer, WhiteIpSerializer, ActionWhiteIpSerializer
 from utils.cdnbest_api import CDNBEST
-from users.models import User
 
 
 class CdnSiteViewSet(viewsets.ModelViewSet):
@@ -19,12 +18,6 @@ class WhiteIpViewSet(viewsets.ModelViewSet):
     queryset = WhiteIp.objects.all()
     serializer_class = WhiteIpSerializer
     search_fields = ['vhost', 'create_time']
-
-
-# class BlackIpViewSet(viewsets.ModelViewSet):
-#     queryset = BlackIp.objects.all()
-#     serializer_class = BlackIpSerializer
-#     search_fields = ['vhost']
 
 
 class ActionWhiteIpViewSet(viewsets.ViewSet):

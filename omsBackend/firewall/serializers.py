@@ -19,14 +19,5 @@ class WhiteIpSerializer(serializers.ModelSerializer):
         model = WhiteIp
         fields = ['url', 'id', 'vhost', 'value', 'action', 'create_user', 'create_time']
 
-
-# class BlackIpSerializer(serializers.ModelSerializer):
-#     site = serializers.SlugRelatedField(queryset=CdnSite.objects.all(), slug_field='name')
-#
-#     class Meta:
-#         model = BlackIp
-#         fields = ['url', 'id', 'site', 'bid', 'value', 'action', 'create_time']
-
-
 class ActionWhiteIpSerializer(serializers.Serializer):
     value = serializers.CharField()

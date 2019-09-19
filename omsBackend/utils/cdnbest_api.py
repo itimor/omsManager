@@ -6,7 +6,9 @@ from datetime import datetime, timedelta
 from hashlib import md5
 import time
 import requests
+import urllib3
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class CDNBEST(object):
     def __init__(self, vhost):
@@ -21,9 +23,9 @@ class CDNBEST(object):
         """
         登录获取token
         """
-        ## 服务器时间总是会少10min中，所以这里也减10min
-        now = (datetime.now() - timedelta(minutes=10)).timestamp()
-        #now = time.time()
+        # 服务器时间总是会少10min中，所以这里也减10min
+        now = (datetime.now() - timedelta(minutes=30)).timestamp()
+        # now = time.time()
         t = str(int(now))
         m1 = md5()
         m2 = md5()
@@ -39,22 +41,18 @@ class CDNBEST(object):
         url = self.api_url + 'token'
         self.__header["Accept"] = "application/x-www-form-urlencoded"
         req = requests.post(url, data=data, headers=self.__header, verify=False)
-        print(req.json())
+        print(req)
         try:
             token = req.json()
-            self.token_s_time = datetime.now()
             return token['token']
         except KeyError:
             raise KeyError
 
-    def http_request(self, method, url, __data=None):
+    def http_request(self, method, url, post_data=None):
         """
         接收请求，返回结果
         """
         self.__header["Accept"] = "application/json"
-        token_e_time = datetime.now()
-        print("token_e_time: %s" % token_e_time)
-        print("token_s_time: %s" % self.token_s_time)
 
         data = {
             'uid': self.uid,
@@ -62,8 +60,8 @@ class CDNBEST(object):
             'token': self.__token
         }
 
-        if __data != None:
-            data.update(**__data)
+        if post_data is not None:
+            data.update(**post_data)
 
         # 传入data参数字典，data为None 则方法为get，有date为post方法
         if method == 'GET':
