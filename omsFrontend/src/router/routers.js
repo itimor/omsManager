@@ -24,12 +24,12 @@ export default [
         path: '/home',
         name: 'home',
         meta: {hideInMenu: true, title: '首页', notCache: true},
-        component: () => import('@/view/firewall/cdnsites.vue')
+        component: () => import('@/view/home/home.vue')
       }
     ]
   },
   {
-    path: '/system', name: 'system', meta: {icon: 'md-settings', title: '系统管理'}, component: Main,
+    path: '/system', name: 'system', meta: {icon: 'md-settings', title: '系统管理', access: ['admin']}, component: Main,
     children: [
       {
         path: 'users',
@@ -46,39 +46,56 @@ export default [
     ]
   },
   {
-    path: '/firewall', name: 'firewall', meta: {icon: 'logo-buffer', title: 'CDN防火墙'}, component: Main,
+    path: '/cdnbest', name: 'cdnbest', meta: {icon: 'logo-buffer', title: 'cdnbest', access: ['admin', 'om24']}, component: Main,
     children: [
       {
-        path: 'cdnsites',
-        name: 'cdnsites',
-        meta: {icon: 'md-bonfire', title: 'cdn站点'},
-        component: () => import('@/view/firewall/cdnsites.vue')
+        path: 'cdnbestsites',
+        name: 'cdnbestsites',
+        meta: {icon: 'md-bonfire', title: 'cdnbest站点'},
+        component: () => import('@/view/cdnbest/cdnsites.vue')
       },
       {
-        path: 'whiteips',
-        name: 'whiteips',
-        meta: {icon: 'md-bonfire', title: '历史记录'},
-        component: () => import('@/view/firewall/whiteips.vue')
+        path: 'cdnbestwhiteips',
+        name: 'cdnbestwhiteips',
+        meta: {icon: 'md-bonfire', title: 'cdnbest记录'},
+        component: () => import('@/view/cdnbest/whiteips.vue')
       }
     ]
   },
   {
-    path: '/dnsmanagers', name: 'dnsmanagers', meta: {icon: 'logo-buffer', title: '域名管理'}, component: Main,
+    path: '/greycdn', name: 'greycdn', meta: {icon: 'md-nuclear', title: 'greycdn', access: ['admin', 'dtcs']}, component: Main,
     children: [
       {
-        path: 'dnsapis',
-        name: 'dnsapis',
-        meta: {icon: 'md-bonfire', title: '域名api'},
-        component: () => import('@/view/dnsmanagers/dnsapis.vue')
+        path: 'greycdnsites',
+        name: 'greycdnsites',
+        meta: {icon: 'md-bonfire', title: 'cdnbest站点'},
+        component: () => import('@/view/greycdn/cdnsites.vue')
       },
       {
-        path: 'dnsdomains',
-        name: 'dnsdomains',
-        meta: {icon: 'md-bonfire', title: '域名列表'},
-        component: () => import('@/view/dnsmanagers/dnsdomains.vue')
-      },
+        path: 'greycdnwhiteips',
+        name: 'greycdnwhiteips',
+        meta: {icon: 'md-bonfire', title: 'cdnbest记录'},
+        component: () => import('@/view/greycdn/whiteips.vue')
+      }
     ]
   },
+  // {
+  //   path: '/dnsmanagers', name: 'dnsmanagers', meta: {icon: 'logo-buffer', title: '域名管理'}, component: Main,
+  //   children: [
+  //     {
+  //       path: 'dnsapis',
+  //       name: 'dnsapis',
+  //       meta: {icon: 'md-bonfire', title: '域名api'},
+  //       component: () => import('@/view/dnsmanagers/dnsapis.vue')
+  //     },
+  //     {
+  //       path: 'dnsdomains',
+  //       name: 'dnsdomains',
+  //       meta: {icon: 'md-bonfire', title: '域名列表'},
+  //       component: () => import('@/view/dnsmanagers/dnsdomains.vue')
+  //     },
+  //   ]
+  // },
   {path: '/401', name: 'error_401', meta: {hideInMenu: true}, component: () => import('@/view/error-page/401.vue')},
   {path: '/500', name: 'error_500', meta: {hideInMenu: true}, component: () => import('@/view/error-page/500.vue')},
   {path: '*', name: 'error_404', meta: {hideInMenu: true}, component: () => import('@/view/error-page/404.vue')}

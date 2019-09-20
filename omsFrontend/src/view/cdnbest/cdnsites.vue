@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-  import {getCdnsite, deleteCdnsite, getActionWhiteip} from '@/api/firewall'
+  import {getCdnsite, deleteCdnsite, getActionWhiteip} from '@/api/cdnbest'
   import addGroup from './components/addsite.vue'
   import editGroup from './components/editsite.vue'
   import addWhiteip from './components/addwhiteip.vue'

@@ -4,7 +4,7 @@ import apiUrl from '@/config'
 // cdnsites
 export function postCdnsite(data) {
   return axios.request({
-    url: apiUrl.cdnsites,
+    url: apiUrl.greycdnsites,
     method: 'post',
     data
   })
@@ -12,7 +12,7 @@ export function postCdnsite(data) {
 
 export function getCdnsite(query) {
   return axios.request({
-    url: apiUrl.cdnsites,
+    url: apiUrl.greycdnsites,
     method: 'get',
     params: query
   })
@@ -20,7 +20,7 @@ export function getCdnsite(query) {
 
 export function putCdnsite(id, data) {
   return axios.request({
-    url: apiUrl.cdnsites + id + '/',
+    url: apiUrl.greycdnsites + id + '/',
     method: 'put',
     data
   })
@@ -28,7 +28,7 @@ export function putCdnsite(id, data) {
 
 export function deleteCdnsite(id) {
   return axios.request({
-    url: apiUrl.cdnsites + id + '/',
+    url: apiUrl.greycdnsites + id + '/',
     method: 'delete'
   })
 }
@@ -36,7 +36,7 @@ export function deleteCdnsite(id) {
 // whiteips
 export function getWhiteip(query) {
   return axios.request({
-    url: apiUrl.whiteips,
+    url: apiUrl.greycdnwhiteips,
     method: 'get',
     params: query
   })
@@ -45,7 +45,7 @@ export function getWhiteip(query) {
 // actionwhiteip
 export function postActionWhiteip(data) {
   return axios.request({
-    url: apiUrl.actionwhiteip,
+    url: apiUrl.actiongreycdn,
     method: 'post',
     data
   })
@@ -53,7 +53,7 @@ export function postActionWhiteip(data) {
 
 export function getActionWhiteip(query) {
   return axios.request({
-    url: apiUrl.actionwhiteip,
+    url: apiUrl.actiongreycdn,
     method: 'get',
     params: query
   })

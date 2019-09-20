@@ -20,14 +20,14 @@
       </div>
     </div>
 
-    <Modal v-model="showWriteForm" :title="`白名单ips`" footer-hide width="800">
+    <Modal v-model="showWriteForm" title="白名单ips" footer-hide width="800">
         <Input type="textarea" :autosize="true" v-model="value" disabled>
       </Input>
     </Modal>
   </div>
 </template>
 <script>
-  import {getWhiteip} from '@/api/firewall'
+  import {getWhiteip} from '@/api/greycdn'
 
   export default {
     data() {
@@ -37,7 +37,7 @@
         tablecolumns: [
           {
             title: '站点',
-            key: 'vhost'
+            key: 'name'
           },
           {
             title: '修改值',
@@ -81,7 +81,7 @@
           search: ''
         },
         showWriteForm: false,
-        value: {}
+        value: ''
       }
     },
     created() {

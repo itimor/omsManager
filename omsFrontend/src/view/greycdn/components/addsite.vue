@@ -4,6 +4,10 @@
       <Input type="text" v-model="ruleForm.name" placeholder="input">
       </Input>
     </FormItem>
+    <FormItem label="站点id" prop="siteid">
+      <Input type="text" v-model="ruleForm.siteid" placeholder="input">
+      </Input>
+    </FormItem>
     <FormItem label="备注" prop="desc">
       <Input type="textarea" :rows="4" v-model="ruleForm.desc" placeholder="input">
       </Input>
@@ -14,18 +18,21 @@
   </Form>
 </template>
 <script>
-  import { putCdnsite } from '@/api/firewall'
+  import { postCdnsite } from '@/api/greycdn'
 
   export default {
-    props: {
-      ruleForm: {
-        type: Object,
-      }
-    },
     data() {
       return {
+        ruleForm: {
+          name: '',
+          siteid: '',
+          desc: ''
+        },
         rules: {
           name: [
+            {required: true, message: 'The input cannot be empty', trigger: 'blur'},
+          ],
+          siteid: [
             {required: true, message: 'The input cannot be empty', trigger: 'blur'},
           ]
         }
@@ -35,7 +42,7 @@
       submitForm(name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            putCdnsite(this.ruleForm.id, this.ruleForm).then(() => {
+            postCdnsite(this.ruleForm).then(() => {
               this.$emit('DialogStatus', false)
             }).catch(error => {
               const errordata = JSON.stringify(error.response.data)

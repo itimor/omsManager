@@ -8,19 +8,19 @@ from firewall.serializers import CdnSiteSerializer, WhiteIpSerializer, ActionWhi
 from utils.cdnbest_api import CDNBEST
 
 
-class CdnSiteViewSet(viewsets.ModelViewSet):
+class CdnBestSiteViewSet(viewsets.ModelViewSet):
     queryset = CdnSite.objects.all()
     serializer_class = CdnSiteSerializer
     filter_fields = ['name']
 
 
-class WhiteIpViewSet(viewsets.ModelViewSet):
+class CdnBestWhiteIpViewSet(viewsets.ModelViewSet):
     queryset = WhiteIp.objects.all()
     serializer_class = WhiteIpSerializer
     search_fields = ['vhost', 'create_time']
 
 
-class ActionWhiteIpViewSet(viewsets.ViewSet):
+class CdnBestActionWhiteIpViewSet(viewsets.ViewSet):
     serializer_class = ActionWhiteIpSerializer
 
     def list(self, request):

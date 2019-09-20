@@ -11,7 +11,7 @@
   </Form>
 </template>
 <script>
-  import {postActionWhiteip} from '@/api/firewall'
+  import {postActionWhiteip} from '@/api/cdnbest'
 
   export default {
     props: {

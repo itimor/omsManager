@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users',
     'firewall',
     'dnsmanager',
+    'greycdn',
 ]
 
 MIDDLEWARE = [

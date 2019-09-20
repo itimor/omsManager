@@ -17,8 +17,14 @@ router.register(r'sendmail', SendmailViewSet)
 router.register(r'sendmessage', SendmessageViewSet)
 router.register(r'fileupload', FileUploadViewSet)
 
-from firewall.views import CdnSiteViewSet, WhiteIpViewSet, ActionWhiteIpViewSet
+from firewall.views import CdnBestSiteViewSet, CdnBestWhiteIpViewSet, CdnBestActionWhiteIpViewSet
 
-router.register(r'cdnsites', CdnSiteViewSet)
-router.register(r'whiteips', WhiteIpViewSet)
-router.register(r'actionwhiteip', ActionWhiteIpViewSet, base_name='actionwhiteip')
+router.register(r'cdnbestsites', CdnBestSiteViewSet)
+router.register(r'cdnbestwhiteips', CdnBestWhiteIpViewSet)
+router.register(r'actioncdnbest', CdnBestActionWhiteIpViewSet, base_name='actioncdnbest')
+
+from greycdn.views import GreyCdnSiteViewSet, GreyCdnWhiteIpViewSet, GreyCdnActionWhiteIpViewSet
+
+router.register(r'greycdnsites', GreyCdnSiteViewSet, base_name='greycdnsites')
+router.register(r'greycdnwhiteips', GreyCdnWhiteIpViewSet, base_name='greycdnwhiteips')
+router.register(r'actiongreycdn', GreyCdnActionWhiteIpViewSet, base_name='actiongreycdn')

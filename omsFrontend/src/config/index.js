@@ -39,10 +39,15 @@ export default {
   sendmail: '/api/sendmail/',
   sendmessage: '/api/sendmessage/',
 
-  // firewall
-  cdnsites: '/api/cdnsites/',
-  whiteips: '/api/whiteips/',
-  actionwhiteip: '/api/actionwhiteip/',
+  // cdnbest
+  cdnbestsites: '/api/cdnbestsites/',
+  cdnbestwhiteips: '/api/cdnbestwhiteips/',
+  actioncdnbest: '/api/actioncdnbest/',
+
+  // greycdn
+  greycdnsites: '/api/greycdnsites/',
+  greycdnwhiteips: '/api/greycdnwhiteips/',
+  actiongreycdn: '/api/actiongreycdn/',
 
   // dns
   dnsapis: '/api/dnsapikeys/',

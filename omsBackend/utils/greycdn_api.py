@@ -86,23 +86,23 @@ class GREYCDN(object):
         获取防火墙配置
         :return:
         """
-        method = 'GET'
-        url = self.api_url + '/api/site/find-white-ip'
+        method = 'POST'
+        url = self.api_url + '/api/site/modify-white-ip'
         data = {
             "siteUid": siteUid,
             "whiteIps": whiteIps
         }
         req = self.http_request(method, url, data)
         if req:
-            return req['response']
+            return req
         else:
             return req
 
+
 if __name__ == '__main__':
     cdn = GREYCDN()
-    siteUid = '6cc07e3f-1a16-487b-8146-8db93ea73eea'
+    siteUid = 'b6358e98-5096-4530-8c80-fc799600965d'
     # print(cdn.getSites())
-    print(cdn.getWhiteips(siteUid))
-    whiteIps = []
-    #print(cdn.putWhiteips(siteUid, whiteIps))
-
+    # print(cdn.getWhiteips(siteUid))
+    whiteIps = '127.0.0.1'
+    print(cdn.putWhiteips(siteUid, whiteIps))
